@@ -1,0 +1,12 @@
+{
+  "author":"Florian Frank",
+  "author_email":"flori@ping.de",
+  "documentation_url":"doc\/index.html",
+  "download_url":"http:\/\/rubyforge.org\/frs\/?group_id=393",
+  "github_url": "http:\/\/github.com\/flori\/file-tail\/tree\/master",
+  "homepage_url":"http:\/\/file-tail.rubyforge.org",
+  "project_dir":"..\/..\/projects\/file-tail",
+  "project_name":"File::Tail for Ruby",
+  "project_unixname":"file-tail",
+  "project_url":"http:\/\/rubyforge.org\/projects\/file-tail"
+}

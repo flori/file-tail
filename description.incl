@@ -1,0 +1,7 @@
+<h2>Description</h2>
+<p>
+This Library is similar to Perl's File::Tail. It can be used
+to extend Ruby's File-objects, as mixin for own File-derived
+classes, or by using the included simple File::Tail::Logfile
+class.
+</p>
