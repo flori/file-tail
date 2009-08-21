@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>File: doc-main.txt [RDoc Documentation]</title>
+
+	<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet" />
+
+	<script src="./js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+</head>
+
+<body class="file">
+	<div id="metadata">
+		<div id="project-metadata">
+			
+			
+			<div id="fileindex-section" class="section project-section">
+				<h3 class="section-header">Files</h3>
+				<ul>
+				
+					<li class="file"><a href="./doc-main_txt.html">doc-main.txt</a></li>
+				
+				</ul>
+			</div>
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="./images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="./File.html">File</a></li>
+				
+					<li><a href="./File/Tail.html">File::Tail</a></li>
+				
+					<li><a href="./File/Tail/BreakException.html">File::Tail::BreakException</a></li>
+				
+					<li><a href="./File/Tail/DeletedException.html">File::Tail::DeletedException</a></li>
+				
+					<li><a href="./File/Tail/Logfile.html">File::Tail::Logfile</a></li>
+				
+					<li><a href="./File/Tail/ReopenException.html">File::Tail::ReopenException</a></li>
+				
+					<li><a href="./File/Tail/ReturnException.html">File::Tail::ReturnException</a></li>
+				
+					<li><a href="./File/Tail/TailException.html">File::Tail::TailException</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h2><a href="File/Tail.html">File::Tail</a> - Tailing files in Ruby</h2>
+<h3>Description</h3>
+<p>
+This is a small ruby library that allows it to &#8220;tail&#8221; files in
+Ruby, including following a file, that still is growing like the unix
+command &#8216;tail -f&#8217; can.
+</p>
+<h3>Author</h3>
+<p>
+Florian Frank <a href="mailto:flori@ping.de">flori@ping.de</a>
+</p>
+<h3>License</h3>
+<p>
+This is free software; you can redistribute it and/or modify it under the
+terms of the GNU General Public License Version 2 as published by the Free
+Software Foundation: <a
+href="http://www.gnu.org/copyleft/gpl.html">www.gnu.org/copyleft/gpl.html</a>
+</p>
+<h3>Download</h3>
+<p>
+The latest version of <b>File::Tail</b> (file-tail) can be found at
+</p>
+<p>
+<a
+href="http://rubyforge.org/frs/?group_id=393">rubyforge.org/frs/?group_id=393</a>
+</p>
+<p>
+Online Documentation should be located at
+</p>
+<p>
+<a href="http://file-tail.rubyforge.org">file-tail.rubyforge.org</a>
+</p>
+<h3>Usage</h3>
+<p>
+<a href="File/Tail.html">File::Tail</a> is a module in the <a
+href="File.html">File</a> class. A lightweight class interface for logfiles
+can be seen under <a href="File/Tail/Logfile.html">File::Tail::Logfile</a>.
+</p>
+<p>
+Direct extension of <a href="File.html">File</a> objects with <a
+href="File/Tail.html">File::Tail</a> works like that:
+</p>
+<pre>
+ File.open(filename) do |log|
+   log.extend(File::Tail)
+   log.interval = 10
+   log.backward(10)
+   log.tail { |line| puts line }
+ end
+</pre>
+<p>
+It&#8217;s also possible to mix <a href="File/Tail.html">File::Tail</a> in
+your own <a href="File.html">File</a> classes (see also <a
+href="File/Tail/Logfile.html">File::Tail::Logfile</a>):
+</p>
+<pre>
+ class MyFile &lt; File
+   include File::Tail
+ end
+ log = MyFile.new(&quot;myfile&quot;)
+ log.interval = 10
+ log.backward(10)
+ log.tail { |line| print line }
+</pre>
+<p>
+The forward/backward method returns self, so it&#8217;s possible to chain
+methods together like that:
+</p>
+<pre>
+ log.backward(10).tail { |line| puts line }
+</pre>
+
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+</body>
+</html>
+
