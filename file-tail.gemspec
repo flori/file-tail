@@ -1,11 +1,12 @@
 # -*- encoding: utf-8 -*-
 Gem::Specification.new do |s|
   s.name = 'file-tail'
-  s.version = '1.0.4'
+  s.version = '1.0.5'
   s.summary = "File::Tail for Ruby"
   s.description = "Library to tail files in Ruby"
 
-  s.files = ["CHANGES", "COPYING", "README", "Rakefile", "VERSION", "examples", "examples/pager.rb", "examples/tail.rb", "file-tail.gemspec", "install.rb", "lib", "lib/file", "lib/file/tail", "lib/file/tail.rb", "lib/file/tail/version.rb", "make_doc.rb", "tests", "tests/test_file-tail.rb"]
+  s.executables = 'rtail'
+  s.files = ["CHANGES", "COPYING", "README", "Rakefile", "VERSION", "bin", "bin/rtail", "examples", "examples/pager.rb", "examples/tail.rb", "file-tail.gemspec", "install.rb", "lib", "lib/file", "lib/file/tail", "lib/file/tail.rb", "lib/file/tail/version.rb", "make_doc.rb", "tests", "tests/test_file-tail.rb"]
 
   s.require_path = 'lib'
 

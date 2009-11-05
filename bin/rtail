@@ -1,0 +1,67 @@
+#!/usr/bin/env ruby
+
+require 'file/tail'
+require 'spruz/go'
+include Spruz::GO
+require 'thread'
+Thread.abort_on_exception = true
+
+$opt = go 'm:h'
+if $opt['h']
+  puts <<EOT
+Usage: #{File.basename($0)} [OPTS] PATHES
+
+OPTS are
+  -m PATTERN   only tail files matching PATTERN, e. g. '*.log'
+  -h           to display this help
+
+EOT
+end
+
+dirs, logfiles = ARGV.partition { |path| File.directory?(path) }
+$log_threads = {}
+$log_mutex = Mutex.new
+
+def add_log(logfile)
+  logfile = File.expand_path logfile
+  $log_threads.key?(logfile) and return
+  warn "Tailing '#{logfile}'."
+  $log_threads[logfile] = Thread.new do
+    File.open(logfile) do |l|
+      l.sync = true
+      l.extend File::Tail
+      l.backward
+      l.tail do |line|
+        $log_mutex.synchronize do
+          print line
+        end
+      end
+    end
+  end
+end
+
+def add_logs(logfiles)
+  for l in logfiles
+    if $opt['m']
+      File.fnmatch?($opt['m'], l) and add_log l
+    else
+      add_log l
+    end
+  end
+end
+
+add_logs(logfiles)
+
+begin
+  loop do
+    for d in dirs
+      logfiles = Dir[File.join(d, '*')].select do |x|
+        File.file?(x) || File.symlink?(x)
+      end
+      add_logs logfiles
+    end
+    sleep 1
+  end
+rescue Interrupt
+  warn " *** Interrupted *** "
+end

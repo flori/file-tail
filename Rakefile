@@ -42,6 +42,7 @@ Gem::Specification.new do |s|
   s.summary = "File::Tail for Ruby"
   s.description = "Library to tail files in Ruby"
 
+  s.executables = 'rtail'
   s.files = #{PKG_FILES.to_a.sort.inspect}
 
   s.require_path = 'lib'
