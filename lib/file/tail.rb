@@ -286,7 +286,7 @@ class File
       raise BreakException if @break_if_eof
       raise ReturnException if @return_if_eof
       sleep_interval
-    rescue Errno::ENOENT, Errno::ESTALE
+    rescue Errno::ENOENT, Errno::ESTALE, Errno::EBADF
       raise ReopenException
     end
 
