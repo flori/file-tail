@@ -1,0 +1,867 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>Module: File::Tail</title>
+
+	<link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
+
+	<script src="../js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+
+</head>
+<body class="module">
+
+	<div id="metadata">
+		<div id="file-metadata">
+			<div id="file-list-section" class="section">
+				<h3 class="section-header">In Files</h3>
+				<div class="section-body">
+					<ul>
+					
+						<li><a href="../lib/file/tail/version_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="lib/file/tail/version.rb">lib/file/tail/version.rb</a></li>
+					
+						<li><a href="../lib/file/tail_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="lib/file/tail.rb">lib/file/tail.rb</a></li>
+					
+					</ul>
+				</div>
+			</div>
+
+			
+		</div>
+
+		<div id="class-metadata">
+
+			<!-- Parent Class -->
+			
+
+			<!-- Namespace Contents -->
+			
+			<div id="namespace-list-section" class="section">
+				<h3 class="section-header">Namespace</h3>
+				<ul class="link-list">
+					
+					<li><span class="type">CLASS</span> <a href="Tail/BreakException.html">File::Tail::BreakException</a></li>
+					
+					<li><span class="type">CLASS</span> <a href="Tail/DeletedException.html">File::Tail::DeletedException</a></li>
+					
+					<li><span class="type">CLASS</span> <a href="Tail/Logfile.html">File::Tail::Logfile</a></li>
+					
+					<li><span class="type">CLASS</span> <a href="Tail/ReopenException.html">File::Tail::ReopenException</a></li>
+					
+					<li><span class="type">CLASS</span> <a href="Tail/ReturnException.html">File::Tail::ReturnException</a></li>
+					
+					<li><span class="type">CLASS</span> <a href="Tail/TailException.html">File::Tail::TailException</a></li>
+					
+				</ul>
+			</div>
+			
+
+			<!-- Method Quickref -->
+			
+			<div id="method-list-section" class="section">
+				<h3 class="section-header">Methods</h3>
+				<ul class="link-list">
+					
+					<li><a href="#M000003">#after_reopen</a></li>
+					
+					<li><a href="#M000005">#backward</a></li>
+					
+					<li><a href="#M000012">#debug</a></li>
+					
+					<li><a href="#M000004">#forward</a></li>
+					
+					<li><a href="#M000008">#preset_attributes</a></li>
+					
+					<li><a href="#M000007">#read_line</a></li>
+					
+					<li><a href="#M000011">#reopen_file</a></li>
+					
+					<li><a href="#M000009">#restat</a></li>
+					
+					<li><a href="#M000010">#sleep_interval</a></li>
+					
+					<li><a href="#M000006">#tail</a></li>
+					
+				</ul>
+			</div>
+			
+
+			<!-- Included Modules -->
+			
+		</div>
+
+		<div id="project-metadata">
+			
+			
+			<div id="fileindex-section" class="section project-section">
+				<h3 class="section-header">Files</h3>
+				<ul>
+				
+					<li class="file"><a href="../README.html">README</a></li>
+				
+				</ul>
+			</div>
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="../images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="../File.html">File</a></li>
+				
+					<li><a href="../File/Tail.html">File::Tail</a></li>
+				
+					<li><a href="../File/Tail/BreakException.html">File::Tail::BreakException</a></li>
+				
+					<li><a href="../File/Tail/DeletedException.html">File::Tail::DeletedException</a></li>
+				
+					<li><a href="../File/Tail/Logfile.html">File::Tail::Logfile</a></li>
+				
+					<li><a href="../File/Tail/ReopenException.html">File::Tail::ReopenException</a></li>
+				
+					<li><a href="../File/Tail/ReturnException.html">File::Tail::ReturnException</a></li>
+				
+					<li><a href="../File/Tail/TailException.html">File::Tail::TailException</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h1 class="module">File::Tail</h1>
+
+		<div id="description">
+			
+		</div>
+
+		<!-- Constants -->
+		
+		<div id="constants-list" class="section">
+			<h3 class="section-header">Constants</h3>
+			<dl>
+			
+				<dt><a name="VERSION">VERSION</a></dt>
+				
+				<dd class="description"><p>
+<a href="Tail.html">File::Tail</a> version
+</p></dd>
+				
+			
+			</dl>
+		</div>
+		
+
+		<!-- Attributes -->
+		
+		<div id="attribute-method-details" class="method-section section">
+			<h3 class="section-header">Attributes</h3>
+
+			
+			<div id="max-interval-attribute-method" class="method-detail">
+				<a name="max_interval"></a>
+				
+				<a name="max_interval="></a>
+				
+				<div class="method-heading attribute-method-heading">
+					<span class="method-name">max_interval</span><span
+						class="attribute-access-type">[RW]</span>
+				</div>
+
+				<div class="method-description">
+				
+				<p>
+The maximum interval <a href="Tail.html">File::Tail</a> sleeps, before it
+tries to take some action like reading the next few lines or reopening the
+file.
+</p>
+				
+				</div>
+			</div>
+			
+			<div id="interval-attribute-method" class="method-detail">
+				<a name="interval"></a>
+				
+				<a name="interval="></a>
+				
+				<div class="method-heading attribute-method-heading">
+					<span class="method-name">interval</span><span
+						class="attribute-access-type">[RW]</span>
+				</div>
+
+				<div class="method-description">
+				
+				<p>
+The start value of the sleep interval. This value goes against <tt><a
+href="Tail.html#max_interval">max_interval</a></tt> if the tailed file is
+silent for a sufficient time.
+</p>
+				
+				</div>
+			</div>
+			
+			<div id="reopen-deleted-attribute-method" class="method-detail">
+				<a name="reopen_deleted"></a>
+				
+				<a name="reopen_deleted="></a>
+				
+				<div class="method-heading attribute-method-heading">
+					<span class="method-name">reopen_deleted</span><span
+						class="attribute-access-type">[RW]</span>
+				</div>
+
+				<div class="method-description">
+				
+				<p>
+If this attribute is set to a true value, <a
+href="Tail.html">File::Tail</a> persists on reopening a deleted file
+waiting <tt><a href="Tail.html#max_interval">max_interval</a></tt> seconds
+between the attempts. This is useful if logfiles are moved away while
+rotation occurs but are recreated at the same place after a while. It
+defaults to true.
+</p>
+				
+				</div>
+			</div>
+			
+			<div id="reopen-suspicious-attribute-method" class="method-detail">
+				<a name="reopen_suspicious"></a>
+				
+				<a name="reopen_suspicious="></a>
+				
+				<div class="method-heading attribute-method-heading">
+					<span class="method-name">reopen_suspicious</span><span
+						class="attribute-access-type">[RW]</span>
+				</div>
+
+				<div class="method-description">
+				
+				<p>
+If this attribute is set to a true value, <a
+href="Tail.html">File::Tail</a> attempts to reopen it&#8217;s tailed file
+after <tt><a
+href="Tail.html#suspicious_interval">suspicious_interval</a></tt> seconds
+of silence.
+</p>
+				
+				</div>
+			</div>
+			
+			<div id="suspicious-interval-attribute-method" class="method-detail">
+				<a name="suspicious_interval"></a>
+				
+				<a name="suspicious_interval="></a>
+				
+				<div class="method-heading attribute-method-heading">
+					<span class="method-name">suspicious_interval</span><span
+						class="attribute-access-type">[RW]</span>
+				</div>
+
+				<div class="method-description">
+				
+				<p>
+This attribute is the invterval in seconds before <a
+href="Tail.html">File::Tail</a> gets suspicious that something has happend
+to it&#8217;s tailed file and an attempt to reopen it is made.
+</p>
+<p>
+If the attribute <tt><a
+href="Tail.html#reopen_suspicious">reopen_suspicious</a></tt> is set to a
+non true value, <a
+href="Tail.html#suspicious_interval">suspicious_interval</a> is
+meaningless. It defaults to 60 seconds.
+</p>
+				
+				</div>
+			</div>
+			
+			<div id="break-if-eof-attribute-method" class="method-detail">
+				<a name="break_if_eof"></a>
+				
+				<a name="break_if_eof="></a>
+				
+				<div class="method-heading attribute-method-heading">
+					<span class="method-name">break_if_eof</span><span
+						class="attribute-access-type">[RW]</span>
+				</div>
+
+				<div class="method-description">
+				
+				<p>
+If this attribute is set to a true value, File::Fail&#8217;s tail method
+raises a <a href="Tail/BreakException.html">BreakException</a> if the end
+of the file is reached.
+</p>
+				
+				</div>
+			</div>
+			
+			<div id="return-if-eof-attribute-method" class="method-detail">
+				<a name="return_if_eof"></a>
+				
+				<a name="return_if_eof="></a>
+				
+				<div class="method-heading attribute-method-heading">
+					<span class="method-name">return_if_eof</span><span
+						class="attribute-access-type">[RW]</span>
+				</div>
+
+				<div class="method-description">
+				
+				<p>
+If this attribute is set to a true value, File::Fail&#8217;s tail method
+just returns if the end of the file is reached.
+</p>
+				
+				</div>
+			</div>
+			
+		</div>
+		
+
+		<!-- Methods -->
+		
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
+
+		
+			<div id="after-reopen-method" class="method-detail ">
+				<a name="M000003"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">after_reopen</span><span
+						class="method-args">(&block)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+The callback is called with <em>self</em> as an argument after a reopen has
+occured. This allows a tailing script to find out, if a logfile has been
+rotated.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="after-reopen-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/file/tail.rb, line 148</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">after_reopen</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+      <span class="ruby-ivar">@after_reopen</span> = <span class="ruby-identifier">block</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="backward-method" class="method-detail ">
+				<a name="M000005"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">backward</span><span
+						class="method-args">(n = 0, bufsiz = nil)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Rewind the last <tt>n</tt> lines of this file, starting from the end. The
+default is to start tailing directly from the end of the file.
+</p>
+<p>
+The additional argument <tt>bufsiz</tt> is used to determine the buffer
+size that is used to step through the file backwards. It defaults to the
+block size of the filesystem this file belongs to or 8192 bytes if this
+cannot be determined.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="backward-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/file/tail.rb, line 189</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">backward</span>(<span class="ruby-identifier">n</span> = <span class="ruby-value">0</span>, <span class="ruby-identifier">bufsiz</span> = <span class="ruby-keyword kw">nil</span>)
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">n</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span>
+        <span class="ruby-identifier">seek</span>(<span class="ruby-value">0</span>, <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">SEEK_END</span>)
+        <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">self</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">bufsiz</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">stat</span>.<span class="ruby-identifier">blksize</span> <span class="ruby-operator">||</span> <span class="ruby-value">8192</span>
+      <span class="ruby-identifier">size</span> = <span class="ruby-identifier">stat</span>.<span class="ruby-identifier">size</span>
+      <span class="ruby-keyword kw">begin</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">bufsiz</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">size</span>
+          <span class="ruby-identifier">seek</span>(<span class="ruby-value">0</span>, <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">SEEK_END</span>)
+          <span class="ruby-keyword kw">while</span> <span class="ruby-identifier">n</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">tell</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword kw">do</span>
+            <span class="ruby-identifier">start</span> = <span class="ruby-identifier">tell</span>
+            <span class="ruby-identifier">seek</span>(<span class="ruby-operator">-</span><span class="ruby-identifier">bufsiz</span>, <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">SEEK_CUR</span>)
+            <span class="ruby-identifier">buffer</span> = <span class="ruby-identifier">read</span>(<span class="ruby-identifier">bufsiz</span>)
+            <span class="ruby-identifier">n</span> <span class="ruby-operator">-=</span> <span class="ruby-identifier">buffer</span>.<span class="ruby-identifier">count</span>(<span class="ruby-value str">&quot;\n&quot;</span>)
+            <span class="ruby-identifier">seek</span>(<span class="ruby-operator">-</span><span class="ruby-identifier">bufsiz</span>, <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">SEEK_CUR</span>)
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-identifier">seek</span>(<span class="ruby-value">0</span>, <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">SEEK_SET</span>)
+          <span class="ruby-identifier">buffer</span> = <span class="ruby-identifier">read</span>(<span class="ruby-identifier">size</span>)
+          <span class="ruby-identifier">n</span> <span class="ruby-operator">-=</span> <span class="ruby-identifier">buffer</span>.<span class="ruby-identifier">count</span>(<span class="ruby-value str">&quot;\n&quot;</span>)
+          <span class="ruby-identifier">seek</span>(<span class="ruby-value">0</span>, <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">SEEK_SET</span>)
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">EINVAL</span>
+        <span class="ruby-identifier">size</span> = <span class="ruby-identifier">tell</span>
+        <span class="ruby-keyword kw">retry</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">pos</span> = <span class="ruby-value">-1</span>
+      <span class="ruby-keyword kw">while</span> <span class="ruby-identifier">n</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>  <span class="ruby-comment cmt"># forward if we are too far back</span>
+        <span class="ruby-identifier">pos</span> = <span class="ruby-identifier">buffer</span>.<span class="ruby-identifier">index</span>(<span class="ruby-value str">&quot;\n&quot;</span>, <span class="ruby-identifier">pos</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)
+        <span class="ruby-identifier">n</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">seek</span>(<span class="ruby-identifier">pos</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>, <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">SEEK_CUR</span>)
+      <span class="ruby-keyword kw">self</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="forward-method" class="method-detail ">
+				<a name="M000004"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">forward</span><span
+						class="method-args">(n = 0)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+Skip the first <tt>n</tt> lines of this file. The default is to don&#8217;t
+skip any lines at all and start at the beginning of this file.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="forward-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/file/tail.rb, line 171</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">n</span> = <span class="ruby-value">0</span>)
+      <span class="ruby-identifier">seek</span>(<span class="ruby-value">0</span>, <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">SEEK_SET</span>)
+      <span class="ruby-keyword kw">while</span> <span class="ruby-identifier">n</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">eof?</span>
+        <span class="ruby-identifier">readline</span>
+        <span class="ruby-identifier">n</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">self</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="tail-method" class="method-detail ">
+				<a name="M000006"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">tail</span><span
+						class="method-args">(n = nil)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+This method tails this file and yields to the given block for every new
+line that is read. If no block is given an array of those lines is returned
+instead. (In this case it&#8217;s better to use a reasonable value for
+<tt>n</tt> or set the <tt><a
+href="Tail.html#return_if_eof">return_if_eof</a></tt> or <tt><a
+href="Tail.html#break_if_eof">break_if_eof</a></tt> attribute to a true
+value to stop the method call from blocking.)
+</p>
+<p>
+If the argument <tt>n</tt> is given, only the next <tt>n</tt> lines are
+read and the method call returns. Otherwise this method call doesn&#8217;t
+return, but yields to block for every new line read from this file for
+ever.
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="tail-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/file/tail.rb, line 237</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">tail</span>(<span class="ruby-identifier">n</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>) <span class="ruby-comment cmt"># :yields: line</span>
+      <span class="ruby-ivar">@n</span> = <span class="ruby-identifier">n</span>
+      <span class="ruby-identifier">result</span> = []
+      <span class="ruby-identifier">array_result</span> = <span class="ruby-keyword kw">false</span>
+      <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">block</span>
+        <span class="ruby-identifier">block</span> = <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span> <span class="ruby-identifier">result</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">line</span> }
+        <span class="ruby-identifier">array_result</span> = <span class="ruby-keyword kw">true</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">preset_attributes</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@lines</span>
+      <span class="ruby-identifier">loop</span> <span class="ruby-keyword kw">do</span>
+        <span class="ruby-keyword kw">begin</span>
+          <span class="ruby-identifier">restat</span>
+          <span class="ruby-identifier">read_line</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+          <span class="ruby-keyword kw">redo</span>
+        <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">ReopenException</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+          <span class="ruby-keyword kw">until</span> <span class="ruby-identifier">eof?</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@n</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+            <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-identifier">readline</span>
+            <span class="ruby-ivar">@n</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@n</span>
+          <span class="ruby-keyword kw">end</span>
+          <span class="ruby-identifier">reopen_file</span>(<span class="ruby-identifier">e</span>.<span class="ruby-identifier">mode</span>)
+          <span class="ruby-ivar">@after_reopen</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword kw">self</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@after_reopen</span>
+        <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">ReturnException</span>
+          <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">array_result</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">result</span> <span class="ruby-operator">:</span> <span class="ruby-keyword kw">nil</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+		</div>
+	
+		<div id="private-instance-method-details" class="method-section section">
+			<h3 class="section-header">Private Instance Methods</h3>
+
+		
+			<div id="debug-method" class="method-detail ">
+				<a name="M000012"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">debug</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p class="missing-docs">(Not documented)</p>
+					
+
+					
+					<div class="method-source-code"
+						id="debug-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/file/tail.rb, line 357</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>
+      <span class="ruby-identifier">$DEBUG</span> <span class="ruby-keyword kw">or</span> <span class="ruby-keyword kw">return</span>
+      <span class="ruby-constant">STDERR</span>.<span class="ruby-identifier">puts</span>({ 
+        <span class="ruby-identifier">:lines</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@lines</span>,
+        <span class="ruby-identifier">:interval</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@interval</span>,
+        <span class="ruby-identifier">:no_read</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@no_read</span>,
+        <span class="ruby-identifier">:n</span>        =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@n</span>,
+      }.<span class="ruby-identifier">inspect</span>)
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="preset-attributes-method" class="method-detail ">
+				<a name="M000008"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">preset_attributes</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p class="missing-docs">(Not documented)</p>
+					
+
+					
+					<div class="method-source-code"
+						id="preset-attributes-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/file/tail.rb, line 293</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">preset_attributes</span>
+      <span class="ruby-ivar">@reopen_deleted</span>       = <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@reopen_deleted</span>.<span class="ruby-identifier">nil?</span>
+      <span class="ruby-ivar">@reopen_suspicious</span>    = <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@reopen_suspicious</span>.<span class="ruby-identifier">nil?</span>
+      <span class="ruby-ivar">@break_if_eof</span>         = <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@break_if_eof</span>.<span class="ruby-identifier">nil?</span>
+      <span class="ruby-ivar">@return_if_eof</span>        = <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@return_if_eof</span>.<span class="ruby-identifier">nil?</span>
+      <span class="ruby-ivar">@max_interval</span>         <span class="ruby-operator">||=</span> <span class="ruby-value">10</span>
+      <span class="ruby-ivar">@interval</span>             <span class="ruby-operator">||=</span> <span class="ruby-ivar">@max_interval</span>
+      <span class="ruby-ivar">@suspicious_interval</span>  <span class="ruby-operator">||=</span> <span class="ruby-value">60</span>
+      <span class="ruby-ivar">@lines</span>                = <span class="ruby-value">0</span>
+      <span class="ruby-ivar">@no_read</span>              = <span class="ruby-value">0</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="read-line-method" class="method-detail ">
+				<a name="M000007"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">read_line</span><span
+						class="method-args">(&block)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p class="missing-docs">(Not documented)</p>
+					
+
+					
+					<div class="method-source-code"
+						id="read-line-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/file/tail.rb, line 266</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">read_line</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+      <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@n</span>
+        <span class="ruby-keyword kw">until</span> <span class="ruby-ivar">@n</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+          <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-identifier">readline</span>
+          <span class="ruby-ivar">@lines</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+          <span class="ruby-ivar">@no_read</span> = <span class="ruby-value">0</span>
+          <span class="ruby-ivar">@n</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span>
+          <span class="ruby-identifier">debug</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ReturnException</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-identifier">readline</span>
+        <span class="ruby-ivar">@lines</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+        <span class="ruby-ivar">@no_read</span> = <span class="ruby-value">0</span>
+        <span class="ruby-identifier">debug</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">EOFError</span>
+      <span class="ruby-identifier">seek</span>(<span class="ruby-value">0</span>, <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">SEEK_CUR</span>)
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ReopenException</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@reopen_suspicious</span> <span class="ruby-keyword kw">and</span>
+        <span class="ruby-ivar">@no_read</span> <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@suspicious_interval</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">BreakException</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@break_if_eof</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ReturnException</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@return_if_eof</span>
+      <span class="ruby-identifier">sleep_interval</span>
+    <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ENOENT</span>, <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ESTALE</span>, <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">EBADF</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ReopenException</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="reopen-file-method" class="method-detail ">
+				<a name="M000011"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">reopen_file</span><span
+						class="method-args">(mode)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p class="missing-docs">(Not documented)</p>
+					
+
+					
+					<div class="method-source-code"
+						id="reopen-file-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/file/tail.rb, line 341</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">reopen_file</span>(<span class="ruby-identifier">mode</span>)
+      <span class="ruby-identifier">$DEBUG</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">$stdout</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;Reopening '#{path}', mode = #{mode}.\n&quot;</span>
+      <span class="ruby-ivar">@no_read</span> = <span class="ruby-value">0</span>
+      <span class="ruby-identifier">reopen</span>(<span class="ruby-identifier">path</span>)
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">mode</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">:bottom</span>
+        <span class="ruby-identifier">backward</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ESTALE</span>, <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ENOENT</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@reopen_deleted</span>    
+        <span class="ruby-identifier">sleep</span> <span class="ruby-ivar">@max_interval</span>
+        <span class="ruby-keyword kw">retry</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">DeletedException</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="restat-method" class="method-detail ">
+				<a name="M000009"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">restat</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p class="missing-docs">(Not documented)</p>
+					
+
+					
+					<div class="method-source-code"
+						id="restat-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/file/tail.rb, line 305</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">restat</span>
+      <span class="ruby-identifier">stat</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">stat</span>(<span class="ruby-identifier">path</span>)
+      <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@stat</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">stat</span>.<span class="ruby-identifier">ino</span> <span class="ruby-operator">!=</span> <span class="ruby-ivar">@stat</span>.<span class="ruby-identifier">ino</span> <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">stat</span>.<span class="ruby-identifier">dev</span> <span class="ruby-operator">!=</span> <span class="ruby-ivar">@stat</span>.<span class="ruby-identifier">dev</span>
+          <span class="ruby-ivar">@stat</span> = <span class="ruby-keyword kw">nil</span>
+          <span class="ruby-identifier">raise</span> <span class="ruby-constant">ReopenException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">:top</span>)
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">stat</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-ivar">@stat</span>.<span class="ruby-identifier">size</span>
+          <span class="ruby-ivar">@stat</span> = <span class="ruby-keyword kw">nil</span>
+          <span class="ruby-identifier">raise</span> <span class="ruby-constant">ReopenException</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">:top</span>)
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-ivar">@stat</span> = <span class="ruby-identifier">stat</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ENOENT</span>, <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ESTALE</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ReopenException</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+			<div id="sleep-interval-method" class="method-detail ">
+				<a name="M000010"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">sleep_interval</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p class="missing-docs">(Not documented)</p>
+					
+
+					
+					<div class="method-source-code"
+						id="sleep-interval-source">
+<pre>
+<span class="ruby-comment cmt"># File lib/file/tail.rb, line 323</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">sleep_interval</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@lines</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+        <span class="ruby-comment cmt"># estimate how much time we will spend on waiting for next line</span>
+        <span class="ruby-ivar">@interval</span> = (<span class="ruby-ivar">@interval</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">/</span> <span class="ruby-ivar">@lines</span>)
+        <span class="ruby-ivar">@lines</span> = <span class="ruby-value">0</span>
+      <span class="ruby-keyword kw">else</span>
+        <span class="ruby-comment cmt"># exponential backoff if logfile is quiet</span>
+        <span class="ruby-ivar">@interval</span> <span class="ruby-operator">*=</span> <span class="ruby-value">2</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@interval</span> <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@max_interval</span>
+        <span class="ruby-comment cmt"># max. wait @max_interval</span>
+        <span class="ruby-ivar">@interval</span> = <span class="ruby-ivar">@max_interval</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">debug</span>
+      <span class="ruby-identifier">sleep</span> <span class="ruby-ivar">@interval</span>
+      <span class="ruby-ivar">@no_read</span> <span class="ruby-operator">+=</span> <span class="ruby-ivar">@interval</span>
+    <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+			</div>
+
+		
+		</div>
+	
+
+	</div>
+
+
+	<div id="rdoc-debugging-section-dump" class="debugging-section">
+	
+		<p>Disabled; run with --debug to generate this.</p>
+	
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+
+</body>
+</html>
+
