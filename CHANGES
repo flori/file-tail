@@ -1,4 +1,7 @@
-2009-11-05 * 1.0.5 * Added rtail executable, nice app to supervise log dirs.
+2010-03-25 * 1.0.5 * Added rtail executable, a nice app to supervise logfiles
+                     and logdirs.
+                   * Disabled creation of gem spec file.
+                   * Cleaned up documentation a bit.
 2009-08-21 * 1.0.4 * Fixed the threaded tests for Ruby 1.9.
                    * Create a gem spec file.
                    * Some cleanup.

@@ -45,8 +45,10 @@ if defined? Gem
 
     s.require_path = 'lib'
 
+    s.add_dependency 'spruz', '>=0.1.0'
+
     s.has_rdoc = true
-    s.rdoc_options << '--main' <<  'README'
+    s.rdoc_options << '--main' <<  'README' << '--title' << 'File::Tail - Tailing files in Ruby'
     s.extra_rdoc_files << 'README'
     s.test_files << 'tests/test_file-tail.rb'
 

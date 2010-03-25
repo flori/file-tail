@@ -2,4 +2,4 @@
 
 $outdir = 'doc/'
 puts "Creating documentation in '#$outdir'."
-system "rdoc -m doc-main.txt -o #$outdir doc-main.txt #{Dir['lib/**/*.rb'] * ' '}"
+system "rdoc -m README -t 'File::Tail - Tailing files in Ruby' -o #$outdir README #{Dir['lib/**/*.rb'] * ' '}"
