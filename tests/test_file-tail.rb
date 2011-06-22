@@ -8,12 +8,11 @@ end
 
 require 'test/unit'
 require 'file/tail'
-require 'tempfile'
 require 'timeout'
 require 'thread'
 Thread.abort_on_exception = true
 
-class TC_FileTail < Test::Unit::TestCase
+class TestFileTail < Test::Unit::TestCase
   include File::Tail
 
   def setup
@@ -38,6 +37,25 @@ class TC_FileTail < Test::Unit::TestCase
   end
 
   def test_backward
+    [ 0, 1, 2, 10, 100 ].each do |lines|
+      @in.backward(lines)
+      assert_equal(lines, count(@in))
+    end
+    @in.backward(101)
+    assert_equal(100, count(@in))
+  end
+
+  def test_backward_small_buffer
+    [ 0, 1, 2, 10, 100 ].each do |lines|
+      @in.backward(lines, 100)
+      assert_equal(lines, count(@in))
+    end
+    @in.backward(101, 100)
+    assert_equal(100, count(@in))
+  end
+
+  def test_backward_small_buffer2
+    @in.default_bufsize = 100
     [ 0, 1, 2, 10, 100 ].each do |lines|
       @in.backward(lines)
       assert_equal(lines, count(@in))
@@ -294,8 +312,8 @@ class TC_FileTail < Test::Unit::TestCase
     return n
   end
 
-  def append(file, n)
-    (1..n).each { |x| file << "#{x} #{"A" * 70}\n" }
+  def append(file, n, size = 70)
+    (1..n).each { |x| file << "#{x} #{"A" * size}\n" }
     file.flush
   end
 end

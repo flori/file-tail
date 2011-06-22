@@ -1,89 +1,12 @@
-require 'file/tail/version'
-
 class File
+  # This module can be included in your own File subclasses or used to extend
+  # files you want to tail.
   module Tail
-    # This is an easy to use Logfile class that includes
-    # the File::Tail module.
-    #
-    # === Usage
-    # The unix command "tail -10f filename" can be emulated like that:
-    #  File::Tail::Logfile.open(filename, :backward => 10) do |log|
-    #    log.tail { |line| puts line }
-    #  end
-    #
-    # Or a bit shorter:
-    #  File::Tail::Logfile.tail(filename, :backward => 10) do |line|
-    #    puts line
-    #  end
-    #
-    # To skip the first 10 lines of the file do that:
-    #  File::Tail::Logfile.open(filename, :forward => 10) do |log|
-    #    log.tail { |line| puts line }
-    #  end
-    #
-    # The unix command "head -10 filename" can be emulated like that:
-    #  File::Tail::Logfile.open(filename, :return_if_eof => true) do |log|
-    #    log.tail(10) { |line| puts line }
-    #  end
-    class Logfile < File
-      include File::Tail
-
-      # This method creates an File::Tail::Logfile object and
-      # yields to it, and closes it, if a block is given, otherwise it just
-      # returns it. The opts hash takes an option like
-      # * <code>:backward => 10</code> to go backwards
-      # * <code>:forward => 10</code> to go forwards
-      # in the logfile for 10 lines at the start. The buffersize
-      # for going backwards can be set with the
-      # * <code>:bufsiz => 8192</code> option.
-      # To define a callback, that will be called after a reopening occurs, use:
-      # * <code>:after_reopen => lambda { |file| p file }</code>
-      #
-      # Every attribute of File::Tail can be set with a <code>:attributename =>
-      # value</code> option.
-      def self.open(filename, opts = {}, &block) # :yields: file
-        file = new filename
-        opts.each do |o, v|
-          writer = o.to_s + "=" 
-          file.__send__(writer, v) if file.respond_to? writer
-        end
-        if opts.key?(:wind) or opts.key?(:rewind)
-          warn ":wind and :rewind options are deprecated, "\
-            "use :forward and :backward instead!"
-        end
-        if backward = opts[:backward] || opts[:rewind]
-          (args = []) << backward
-          args << opt[:bufsiz] if opts[:bufsiz]
-          file.backward(*args)
-        elsif forward = opts[:forward] || opts[:wind]
-          file.forward(forward)
-        end
-        if opts[:after_reopen]
-          file.after_reopen(&opts[:after_reopen])
-        end
-        if block_given?
-          begin
-            block.call file
-          ensure
-            file.close
-            nil
-          end
-        else
-          file
-        end
-      end
-
-      # Like open, but yields to every new line encountered in the logfile in
-      # +block+.
-      def self.tail(filename, opts = {}, &block)
-        if ([ :forward, :backward ] & opts.keys).empty?
-          opts[:backward] = 0
-        end
-        open(filename, opts) do |log|
-          log.tail { |line| block.call line }
-        end
-      end
-    end
+    require 'file/tail/version'
+    require 'file/tail/logfile'
+    require 'file/tail/group'
+    require 'file/tail/tailer'
+    require 'file/tail/line_extension'
 
     # This is the base class of all exceptions that are raised
     # in File::Tail.
@@ -166,6 +89,11 @@ class File
     # just returns if the end of the file is reached.
     attr_accessor :return_if_eof
 
+    # Default buffer size, that is used while going backward from a file's end.
+    # This defaults to nil, which means that File::Tail attempts to derive this
+    # value from the filesystem block size.
+    attr_accessor :default_bufsize
+
     # Skip the first <code>n</code> lines of this file. The default is to don't
     # skip any lines at all and start at the beginning of this file.
     def forward(n = 0)
@@ -181,27 +109,27 @@ class File
     # from the end. The default is to start tailing directly from the
     # end of the file.
     #
-    # The additional argument <code>bufsiz</code> is
+    # The additional argument <code>bufsize</code> is
     # used to determine the buffer size that is used to step through
     # the file backwards. It defaults to the block size of the 
     # filesystem this file belongs to or 8192 bytes if this cannot
     # be determined.
-    def backward(n = 0, bufsiz = nil)
+    def backward(n = 0, bufsize = nil)
       if n <= 0
         seek(0, File::SEEK_END)
         return self
       end
-      bufsiz ||= stat.blksize || 8192
+      bufsize ||= default_bufsize || stat.blksize || 8192
       size = stat.size
       begin
-        if bufsiz < size
+        if bufsize < size
           seek(0, File::SEEK_END)
           while n > 0 and tell > 0 do
             start = tell
-            seek(-bufsiz, File::SEEK_CUR)
-            buffer = read(bufsiz)
+            seek(-bufsize, File::SEEK_CUR)
+            buffer = read(bufsize)
             n -= buffer.count("\n")
-            seek(-bufsiz, File::SEEK_CUR)
+            seek(-bufsize, File::SEEK_CUR)
           end
         else
           seek(0, File::SEEK_SET)
@@ -267,17 +195,17 @@ class File
       if @n
         until @n == 0
           block.call readline
-          @lines += 1
+          @lines   += 1
           @no_read = 0
-          @n -= 1
-          debug
+          @n       -= 1
+          output_debug_information
         end
         raise ReturnException
       else
         block.call readline
-        @lines += 1
+        @lines   += 1
         @no_read = 0
-        debug
+        output_debug_information
       end
     rescue EOFError
       seek(0, File::SEEK_CUR)
@@ -333,7 +261,7 @@ class File
         # max. wait @max_interval
         @interval = @max_interval
       end
-      debug
+      output_debug_information
       sleep @interval
       @no_read += @interval
     end
@@ -354,14 +282,16 @@ class File
       end
     end
 
-    def debug
+    def output_debug_information
       $DEBUG or return
       STDERR.puts({ 
+        :path     => path,
         :lines    => @lines,
         :interval => @interval,
         :no_read  => @no_read,
         :n        => @n,
       }.inspect)
+      self
     end
   end
 end

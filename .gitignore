@@ -1,4 +1,5 @@
-.*.sw[pon]
 coverage
 pkg
 Gemfile.lock
+.*
+doc

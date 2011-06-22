@@ -10,10 +10,10 @@ include Config
 
 PKG_NAME = 'file-tail'
 PKG_VERSION = File.read('VERSION').chomp
-PKG_FILES = FileList["**/*"].exclude(/^(pkg|coverage|doc|.bundle|.git)/)
+PKG_FILES = FileList["**/*"].exclude(/^(pkg|coverage|doc|\..*|Gemfile.lock)/)
 CLEAN.include 'coverage', 'doc'
 
-desc "Installing library"
+desc "Install executable/library into site_ruby directories"
 task :install  do
   cd 'lib' do
     libdir = CONFIG["sitelibdir"]
@@ -25,24 +25,34 @@ task :install  do
 
     dest = File.join(dest, 'tail')
     mkdir_p(dest)
-    file = File.join('file', 'tail', 'version.rb')
-    install(file, dest, :verbose => true)
+    for file in Dir[File.join('file', 'tail', '*.rb')]
+      install(file, dest, :verbose => true)
+    end
   end
+  bindir = CONFIG["bindir"]
+  install('bin/rtail', bindir, :verbose => true, :mode => 0755)
 end
 
-desc "Creating documentation"
+desc "Create documentation"
 task :doc do
-  sh "sdoc -m README -t 'File::Tail - Tailing files in Ruby' README #{Dir['lib/**/*.rb'] * ' '}"
+  sh "sdoc -m README.rdoc -t 'File::Tail - Tailing files in Ruby' README.rdoc #{Dir['lib/**/*.rb'] * ' '}"
 end
 
 desc "Testing library"
 task :test  do
-  ruby %{-Ilib tests/test_file-tail.rb}
+  ruby %{-Ilib tests/test_file-tail*.rb}
 end
 
 desc "Testing library with rcov"
 task :coverage  do
-  system %{rcov -x '\\btests\/' -Ilib tests/test_file-tail.rb}
+  sh %{rcov -x '\\b/gems\/' -x '\\btests\/' -Ilib tests/test_file-tail*.rb}
+end
+
+namespace :gems do
+  desc "Install all gems from the Gemfile"
+  task :install  do
+    sh 'bundle install'
+  end
 end
 
 if defined? Gem
@@ -57,11 +67,11 @@ if defined? Gem
 
     s.require_path = 'lib'
 
-    s.add_dependency 'spruz', '>=0.1.0'
+    s.add_dependency 'spruz', '~>0.2'
 
-    s.rdoc_options << '--main' <<  'README' << '--title' << 'File::Tail - Tailing files in Ruby'
-    s.extra_rdoc_files << 'README'
-    s.test_files << 'tests/test_file-tail.rb'
+    s.rdoc_options << '--main' <<  'README.rdoc' << '--title' << 'File::Tail - Tailing files in Ruby'
+    s.extra_rdoc_files << 'README.rdoc'
+    s.test_files.concat Dir['tests/test_*.rb']
 
     s.author = "Florian Frank"
     s.email = "flori@ping.de"
@@ -101,6 +111,8 @@ EOT
   end
 end
 
+desc "Run the tests by default"
 task :default => [ :version, :test ]
 
-task :release => [ :clean, :version, :package ]
+desc "Prepare release of the library"
+task :release => [ :clean, :gemspec, :package ]
