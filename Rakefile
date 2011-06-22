@@ -1,7 +1,7 @@
 # vim: set filetype=ruby et sw=2 ts=2:
 
 begin
-  require 'rake/gempackagetask'
+  require 'rubygems/package_task'
 rescue LoadError
 end
 require 'rake/clean'
@@ -10,17 +10,29 @@ include Config
 
 PKG_NAME = 'file-tail'
 PKG_VERSION = File.read('VERSION').chomp
-PKG_FILES = FileList["**/*"].exclude(/^(pkg|coverage|doc)/)
+PKG_FILES = FileList["**/*"].exclude(/^(pkg|coverage|doc|.bundle|.git)/)
 CLEAN.include 'coverage', 'doc'
 
 desc "Installing library"
 task :install  do
-  ruby 'install.rb'
+  cd 'lib' do
+    libdir = CONFIG["sitelibdir"]
+
+    dest = File.join(libdir, 'file')
+    mkdir_p(dest)
+    file = File.join('file', 'tail.rb')
+    install(file, dest, :verbose => true)
+
+    dest = File.join(dest, 'tail')
+    mkdir_p(dest)
+    file = File.join('file', 'tail', 'version.rb')
+    install(file, dest, :verbose => true)
+  end
 end
 
 desc "Creating documentation"
 task :doc do
-  ruby 'make_doc.rb'
+  sh "sdoc -m README -t 'File::Tail - Tailing files in Ruby' README #{Dir['lib/**/*.rb'] * ' '}"
 end
 
 desc "Testing library"
@@ -47,7 +59,6 @@ if defined? Gem
 
     s.add_dependency 'spruz', '>=0.1.0'
 
-    s.has_rdoc = true
     s.rdoc_options << '--main' <<  'README' << '--title' << 'File::Tail - Tailing files in Ruby'
     s.extra_rdoc_files << 'README'
     s.test_files << 'tests/test_file-tail.rb'
@@ -58,7 +69,14 @@ if defined? Gem
     s.rubyforge_project = PKG_NAME
   end
 
-  Rake::GemPackageTask.new(spec) do |pkg|
+  desc 'Create a gemspec file'
+  task :gemspec => :version do
+    File.open('file-tail.gemspec', 'w') do |gemspec|
+      gemspec.write spec.to_ruby
+    end
+  end
+
+  Gem::PackageTask.new(spec) do |pkg|
     pkg.need_tar = true
     pkg.package_files += PKG_FILES
   end
