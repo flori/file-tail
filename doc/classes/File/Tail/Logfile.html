@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>File::Tail::Logfile</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            File::Tail::Logfile 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../../File.html">File</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/lib/file/tail/logfile_rb.html">lib/file/tail/logfile.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+This is an easy to use <a href="Logfile.html">Logfile</a> class that
+includes the <a href="../Tail.html">File::Tail</a> module.
+</p>
+<h3>Usage</h3>
+<p>
+The unix command &#8220;tail -10f filename&#8221; can be emulated like
+that:
+</p>
+<pre>
+ File::Tail::Logfile.open(filename, :backward =&gt; 10) do |log|
+   log.tail { |line| puts line }
+ end
+</pre>
+<p>
+Or a bit shorter:
+</p>
+<pre>
+ File::Tail::Logfile.tail(filename, :backward =&gt; 10) do |line|
+   puts line
+ end
+</pre>
+<p>
+To skip the first 10 lines of the file do that:
+</p>
+<pre>
+ File::Tail::Logfile.open(filename, :forward =&gt; 10) do |log|
+   log.tail { |line| puts line }
+ end
+</pre>
+<p>
+The unix command &#8220;head -10 filename&#8221; can be emulated like that:
+</p>
+<pre>
+ File::Tail::Logfile.open(filename, :return_if_eof =&gt; true) do |log|
+   log.tail(10) { |line| puts line }
+ end
+</pre>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>O</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000024">open</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>T</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000028">tail</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+        
+        <li>
+            
+            <a href="LineExtension.html">File::Tail::LineExtension</a>
+            
+            START:includes
+        </li>
+        
+    </ul>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000024">
+                    
+                    <a name="M000024"></a><b>open</b>(filename, opts = {})
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+This method creates an <a href="Logfile.html">File::Tail::Logfile</a>
+object and yields to it, and closes it, if a block is given, otherwise it
+just returns it. The opts hash takes an option like
+</p>
+<ul>
+<li><tt>:backward =&gt; 10</tt> to go backwards
+
+</li>
+<li><tt>:forward =&gt; 10</tt> to go forwards
+
+</li>
+</ul>
+<p>
+in the logfile for 10 lines at the start. The buffersize for going
+backwards can be set with the
+</p>
+<ul>
+<li><tt>:bufsiz =&gt; 8192</tt> option.
+
+</li>
+</ul>
+<p>
+To define a callback, that will be called after a reopening occurs, use:
+</p>
+<ul>
+<li><tt>:after_reopen =&gt; lambda { |file| p file }</tt>
+
+</li>
+</ul>
+<p>
+Every attribute of <a href="../Tail.html">File::Tail</a> can be set with a
+<tt>:attributename =&gt; value</tt> option.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000024_source')" id="l_M000024_source">show</a>
+                        
+                    </p>
+                    <div id="M000024_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/file/tail/logfile.rb, line 42</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-identifier">opts</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>) <span class="ruby-comment cmt"># :yields: file</span>
+        <span class="ruby-identifier">file</span> = <span class="ruby-identifier">new</span> <span class="ruby-identifier">filename</span>
+        <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">o</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">writer</span> = <span class="ruby-identifier">o</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-value str">&quot;=&quot;</span> 
+          <span class="ruby-identifier">file</span>.<span class="ruby-identifier">__send__</span>(<span class="ruby-identifier">writer</span>, <span class="ruby-identifier">v</span>) <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">file</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-identifier">writer</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">:wind</span>) <span class="ruby-keyword kw">or</span> <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">:rewind</span>)
+          <span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;:wind and :rewind options are deprecated, &quot;</span>\
+            <span class="ruby-value str">&quot;use :forward and :backward instead!&quot;</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">backward</span> = <span class="ruby-identifier">opts</span>[<span class="ruby-identifier">:backward</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">opts</span>[<span class="ruby-identifier">:rewind</span>]
+          (<span class="ruby-identifier">args</span> = []) <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">backward</span>
+          <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">opt</span>[<span class="ruby-identifier">:bufsiz</span>] <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">opts</span>[<span class="ruby-identifier">:bufsiz</span>]
+          <span class="ruby-identifier">file</span>.<span class="ruby-identifier">backward</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+        <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">forward</span> = <span class="ruby-identifier">opts</span>[<span class="ruby-identifier">:forward</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">opts</span>[<span class="ruby-identifier">:wind</span>]
+          <span class="ruby-identifier">file</span>.<span class="ruby-identifier">forward</span>(<span class="ruby-identifier">forward</span>)
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">opts</span>[<span class="ruby-identifier">:after_reopen</span>]
+          <span class="ruby-identifier">file</span>.<span class="ruby-identifier">after_reopen</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">opts</span>[<span class="ruby-identifier">:after_reopen</span>])
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block_given?</span>
+          <span class="ruby-keyword kw">begin</span>
+            <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-identifier">file</span>
+          <span class="ruby-keyword kw">ensure</span>
+            <span class="ruby-identifier">file</span>.<span class="ruby-identifier">close</span>
+            <span class="ruby-keyword kw">nil</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-identifier">file</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000028">
+                    
+                    <a name="M000028"></a><b>tail</b>(filename, opts = {}, &amp;block)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Like open, but yields to every new line encountered in the logfile in
+<tt>block</tt>.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000028_source')" id="l_M000028_source">show</a>
+                        
+                    </p>
+                    <div id="M000028_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/file/tail/logfile.rb, line 76</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">tail</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-identifier">opts</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+        <span class="ruby-keyword kw">if</span> ([ <span class="ruby-identifier">:forward</span>, <span class="ruby-identifier">:backward</span> ] <span class="ruby-operator">&amp;</span> <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">keys</span>).<span class="ruby-identifier">empty?</span>
+          <span class="ruby-identifier">opts</span>[<span class="ruby-identifier">:backward</span>] = <span class="ruby-value">0</span>
+        <span class="ruby-keyword kw">end</span>
+        <span class="ruby-identifier">open</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-identifier">opts</span>) <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">log</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">log</span>.<span class="ruby-identifier">tail</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span> <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-identifier">line</span> }
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+</html>    

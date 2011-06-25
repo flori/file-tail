@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>File::Tail::ReopenException</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            File::Tail::ReopenException 
+            
+                <span class="parent">&lt; 
+                    
+                    TailException
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/lib/file/tail_rb.html">lib/file/tail.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+The <a href="ReopenException.html">ReopenException</a> is raised internally
+if <a href="../Tail.html">File::Tail</a> gets suspicious something unusual
+has happend to the tailed file, e. g., it was rotated away. The exception
+is caught and an attempt to reopen it is made.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>N</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000000">new</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Attributes</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [R]
+            </td>
+            <td class='attr-name'>mode</td>
+            <td class='attr-desc'></td>
+        </tr>
+        
+    </table>
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000000">
+                    
+                    <a name="M000000"></a><b>new</b>(mode = :bottom)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Creates an <a href="ReopenException.html">ReopenException</a> object. The
+mode defaults to <tt>:bottom</tt> which indicates that the file should be
+tailed beginning from the end. <tt>:top</tt> indicates, that it should be
+tailed from the beginning from the start.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000000_source')" id="l_M000000_source">show</a>
+                        
+                    </p>
+                    <div id="M000000_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/file/tail.rb, line 40</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">mode</span> = <span class="ruby-identifier">:bottom</span>)
+        <span class="ruby-keyword kw">super</span>(<span class="ruby-keyword kw">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">name</span>)
+        <span class="ruby-ivar">@mode</span> = <span class="ruby-identifier">mode</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+</html>    

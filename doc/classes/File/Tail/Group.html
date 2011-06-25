@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>File::Tail::Group</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            File::Tail::Group 
+            
+                <span class="parent">&lt; 
+                    
+                    Object
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/lib/file/tail/group_rb.html">lib/file/tail/group.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+This class can be used to coordinate tailing of many files, which have been
+added to the group.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>#</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000018"><<</a>,</li>
+                
+                <li><a href="#M000016">[]</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>A</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000017">add</a>,</li>
+                
+                <li><a href="#M000019">add_file</a>,</li>
+                
+                <li><a href="#M000020">add_filename</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>E</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000021">each_file</a>,</li>
+                
+                <li><a href="#M000022">each_tailer</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>N</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000015">new</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>S</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000023">stop</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>T</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000025">tail</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Class Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000016">
+                    
+                    <a name="M000016"></a><b>[]</b>(*files)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Creates a group for <tt>files</tt> (IO instances or filename strings).
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000016_source')" id="l_M000016_source">show</a>
+                        
+                    </p>
+                    <div id="M000016_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/file/tail/group.rb, line 21</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">self</span>.<span class="ruby-operator">[]</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">files</span>)
+        <span class="ruby-identifier">new</span>(<span class="ruby-identifier">:files</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">files</span>)
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000015">
+                    
+                    <a name="M000015"></a><b>new</b>(opts = {})
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Creates a new <a href="Group.html">File::Tail::Group</a> instance.
+</p>
+<p>
+The following options can be given as arguments:
+</p>
+<table>
+<tr><td valign="top">:files:</td><td>an array of files (or filenames to open) that are placed into the group.
+
+</td></tr>
+</table>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000015_source')" id="l_M000015_source">show</a>
+                        
+                    </p>
+                    <div id="M000015_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/file/tail/group.rb, line 13</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">opts</span> = {})
+        <span class="ruby-ivar">@tailers</span> = <span class="ruby-constant">ThreadGroup</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">files</span> = <span class="ruby-identifier">opts</span>[<span class="ruby-identifier">:files</span>]
+          <span class="ruby-constant">Array</span>(<span class="ruby-identifier">files</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span> <span class="ruby-identifier">add</span> <span class="ruby-identifier">file</span> }
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000018">
+                    
+                    <a name="M000018"></a><b>&lt;&lt;</b>(file_or_filename)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Alias for <a href="Group.html#M000017">add</a>
+</p>
+
+                </div>
+                
+                
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000017">
+                    
+                    <a name="M000017"></a><b>add</b>(file_or_filename)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Add a file (IO instance) or filename (responding to to_str) to this group.
+</p>
+
+                </div>
+                
+                
+                <div class="aka">
+                    This method is also aliased as
+                    
+                    <a href="Group.html#M000018">&lt;&lt;</a>
+                    
+                </div>
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000017_source')" id="l_M000017_source">show</a>
+                        
+                    </p>
+                    <div id="M000017_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/file/tail/group.rb, line 27</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add</span>(<span class="ruby-identifier">file_or_filename</span>)
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">file_or_filename</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:to_io</span>)
+          <span class="ruby-identifier">add_file</span> <span class="ruby-identifier">file_or_filename</span>.<span class="ruby-identifier">to_io</span>
+        <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">file_or_filename</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">:to_str</span>)
+          <span class="ruby-identifier">add_filename</span> <span class="ruby-identifier">file_or_filename</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000019">
+                    
+                    <a name="M000019"></a><b>add_file</b>(file)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Add the IO instance <tt>file</tt> to this group.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000019_source')" id="l_M000019_source">show</a>
+                        
+                    </p>
+                    <div id="M000019_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/file/tail/group.rb, line 38</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add_file</span>(<span class="ruby-identifier">file</span>)
+        <span class="ruby-identifier">setup_file_tailer</span> <span class="ruby-identifier">file</span>
+        <span class="ruby-keyword kw">self</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000020">
+                    
+                    <a name="M000020"></a><b>add_filename</b>(filename, n = 0)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Add a file created by opening <tt>filename</tt> to this group after
+stepping <tt>n</tt> lines backwards from the end of it.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000020_source')" id="l_M000020_source">show</a>
+                        
+                    </p>
+                    <div id="M000020_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/file/tail/group.rb, line 45</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">add_filename</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-identifier">n</span> = <span class="ruby-value">0</span>)
+        <span class="ruby-identifier">file</span> = <span class="ruby-constant">Logfile</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">filename</span>.<span class="ruby-identifier">to_str</span>, <span class="ruby-identifier">:backward</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">n</span>)
+        <span class="ruby-identifier">file</span>.<span class="ruby-identifier">backward</span> <span class="ruby-identifier">n</span>
+        <span class="ruby-identifier">setup_file_tailer</span> <span class="ruby-identifier">file</span>
+        <span class="ruby-keyword kw">self</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000021">
+                    
+                    <a name="M000021"></a><b>each_file</b>(&amp;block)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Iterate over all files contained in this group yielding to <tt>block</tt>
+for each of them.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000021_source')" id="l_M000021_source">show</a>
+                        
+                    </p>
+                    <div id="M000021_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/file/tail/group.rb, line 54</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">each_file</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+        <span class="ruby-identifier">each_tailer</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">file</span> }.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000022">
+                    
+                    <a name="M000022"></a><b>each_tailer</b>(&amp;block)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Iterate over all tailers in this group yielding to <tt>block</tt> for each
+of them.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000022_source')" id="l_M000022_source">show</a>
+                        
+                    </p>
+                    <div id="M000022_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/file/tail/group.rb, line 60</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">each_tailer</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+        <span class="ruby-ivar">@tailers</span>.<span class="ruby-identifier">list</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span> <span class="ruby-identifier">t</span> }.<span class="ruby-identifier">map</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000023">
+                    
+                    <a name="M000023"></a><b>stop</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Stop all tailers in this group at once.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000023_source')" id="l_M000023_source">show</a>
+                        
+                    </p>
+                    <div id="M000023_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/file/tail/group.rb, line 65</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">stop</span>
+        <span class="ruby-identifier">each_tailer</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">stop</span> }
+        <span class="ruby-identifier">each_tailer</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">join</span> }
+        <span class="ruby-keyword kw">self</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000025">
+                    
+                    <a name="M000025"></a><b>tail</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+<a href="../Tail.html">Tail</a> all the lines of all the files in the <a
+href="Group.html">Tail::Group</a> instance, that is yield to each of them.
+</p>
+<p>
+Every line is extended with the <a
+href="LineExtension.html">LineExtension</a> module, that adds some methods
+to the line string. To get the path of the file this line was received from
+call line.file.path.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000025_source')" id="l_M000025_source">show</a>
+                        
+                    </p>
+                    <div id="M000025_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/file/tail/group.rb, line 77</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">tail</span>
+        <span class="ruby-identifier">wait_for_activity</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">tailer</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">tailer</span>.<span class="ruby-identifier">pending_lines</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">line</span>.<span class="ruby-identifier">extend</span> <span class="ruby-constant">LineExtension</span>
+            <span class="ruby-identifier">line</span>.<span class="ruby-identifier">instance_variable_set</span> <span class="ruby-identifier">:@tailer</span>, <span class="ruby-identifier">tailer</span>
+            <span class="ruby-keyword kw">yield</span> <span class="ruby-identifier">line</span>
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+</html>    

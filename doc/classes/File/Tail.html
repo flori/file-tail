@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>File::Tail</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+    <script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Module</span> 
+            File::Tail 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/lib/file/tail_rb.html">lib/file/tail.rb</a></li>
+            
+            <li><a href="../../files/lib/file/tail/version_rb.html">lib/file/tail/version.rb</a></li>
+            
+            <li><a href="../../files/lib/file/tail/line_extension_rb.html">lib/file/tail/line_extension.rb</a></li>
+            
+            <li><a href="../../files/lib/file/tail/tailer_rb.html">lib/file/tail/tailer.rb</a></li>
+            
+            <li><a href="../../files/lib/file/tail/group_rb.html">lib/file/tail/group.rb</a></li>
+            
+            <li><a href="../../files/lib/file/tail/logfile_rb.html">lib/file/tail/logfile.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+This module can be included in your own <a href="../File.html">File</a>
+subclasses or used to extend files you want to tail.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>A</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000001">after_reopen</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>B</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000003">backward</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>F</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000002">forward</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>T</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000004">tail</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+    <div class="sectiontitle">Classes and Modules</div>
+    <ul>
+        
+        <li><span class="type">MODULE</span> <a href="Tail/LineExtension.html">File::Tail::LineExtension</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="Tail/BreakException.html">File::Tail::BreakException</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="Tail/DeletedException.html">File::Tail::DeletedException</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="Tail/Group.html">File::Tail::Group</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="Tail/Logfile.html">File::Tail::Logfile</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="Tail/ReopenException.html">File::Tail::ReopenException</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="Tail/ReturnException.html">File::Tail::ReturnException</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="Tail/TailException.html">File::Tail::TailException</a></li>
+        
+        <li><span class="type">CLASS</span> <a href="Tail/Tailer.html">File::Tail::Tailer</a></li>
+        
+    </ul>
+    
+
+    
+    <div class="sectiontitle">Constants</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class="attr-name">VERSION</td>
+            <td>=</td>
+            <td class="attr-value">'1.0.6'</td>
+        </tr>
+        
+        <tr valign='top'>
+            <td>&nbsp;</td>
+            <td colspan="2" class="attr-desc"><p>
+<a href="Tail.html">File::Tail</a> version
+</p>
+</td>
+        </tr>
+        
+        
+    </table>
+    
+
+    
+    <div class="sectiontitle">Attributes</div>
+    <table border='0' cellpadding='5'>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [RW]
+            </td>
+            <td class='attr-name'>max_interval</td>
+            <td class='attr-desc'><p>
+The maximum interval <a href="Tail.html">File::Tail</a> sleeps, before it
+tries to take some action like reading the next few lines or reopening the
+file.
+</p></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [RW]
+            </td>
+            <td class='attr-name'>interval</td>
+            <td class='attr-desc'><p>
+The start value of the sleep interval. This value goes against <tt><a
+href="Tail.html#max_interval">max_interval</a></tt> if the tailed file is
+silent for a sufficient time.
+</p></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [RW]
+            </td>
+            <td class='attr-name'>reopen_deleted</td>
+            <td class='attr-desc'><p>
+If this attribute is set to a true value, <a
+href="Tail.html">File::Tail</a> persists on reopening a deleted file
+waiting <tt><a href="Tail.html#max_interval">max_interval</a></tt> seconds
+between the attempts. This is useful if logfiles are moved away while
+rotation occurs but are recreated at the same place after a while. It
+defaults to true.
+</p></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [RW]
+            </td>
+            <td class='attr-name'>reopen_suspicious</td>
+            <td class='attr-desc'><p>
+If this attribute is set to a true value, <a
+href="Tail.html">File::Tail</a> attempts to reopen it&#8217;s tailed file
+after <tt><a
+href="Tail.html#suspicious_interval">suspicious_interval</a></tt> seconds
+of silence.
+</p></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [RW]
+            </td>
+            <td class='attr-name'>suspicious_interval</td>
+            <td class='attr-desc'><p>
+This attribute is the invterval in seconds before <a
+href="Tail.html">File::Tail</a> gets suspicious that something has happend
+to it&#8217;s tailed file and an attempt to reopen it is made.
+</p>
+<p>
+If the attribute <tt><a
+href="Tail.html#reopen_suspicious">reopen_suspicious</a></tt> is set to a
+non true value, <a
+href="Tail.html#suspicious_interval">suspicious_interval</a> is
+meaningless. It defaults to 60 seconds.
+</p></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [RW]
+            </td>
+            <td class='attr-name'>break_if_eof</td>
+            <td class='attr-desc'><p>
+If this attribute is set to a true value, File::Fail&#8217;s tail method
+raises a <a href="Tail/BreakException.html">BreakException</a> if the end
+of the file is reached.
+</p></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [RW]
+            </td>
+            <td class='attr-name'>return_if_eof</td>
+            <td class='attr-desc'><p>
+If this attribute is set to a true value, File::Fail&#8217;s tail method
+just returns if the end of the file is reached.
+</p></td>
+        </tr>
+        
+        <tr valign='top'>
+            <td class='attr-rw'>
+                [RW]
+            </td>
+            <td class='attr-name'>default_bufsize</td>
+            <td class='attr-desc'><p>
+Default buffer size, that is used while going backward from a file&#8217;s
+end. This defaults to nil, which means that <a
+href="Tail.html">File::Tail</a> attempts to derive this value from the
+filesystem block size.
+</p></td>
+        </tr>
+        
+    </table>
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000001">
+                    
+                    <a name="M000001"></a><b>after_reopen</b>(&amp;block)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+The callback is called with <em>self</em> as an argument after a reopen has
+occured. This allows a tailing script to find out, if a logfile has been
+rotated.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000001_source')" id="l_M000001_source">show</a>
+                        
+                    </p>
+                    <div id="M000001_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/file/tail.rb, line 71</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">after_reopen</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+      <span class="ruby-ivar">@after_reopen</span> = <span class="ruby-identifier">block</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000003">
+                    
+                    <a name="M000003"></a><b>backward</b>(n = 0, bufsize = nil)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Rewind the last <tt>n</tt> lines of this file, starting from the end. The
+default is to start tailing directly from the end of the file.
+</p>
+<p>
+The additional argument <tt>bufsize</tt> is used to determine the buffer
+size that is used to step through the file backwards. It defaults to the
+block size of the filesystem this file belongs to or 8192 bytes if this
+cannot be determined.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000003_source')" id="l_M000003_source">show</a>
+                        
+                    </p>
+                    <div id="M000003_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/file/tail.rb, line 117</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">backward</span>(<span class="ruby-identifier">n</span> = <span class="ruby-value">0</span>, <span class="ruby-identifier">bufsize</span> = <span class="ruby-keyword kw">nil</span>)
+      <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">n</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span>
+        <span class="ruby-identifier">seek</span>(<span class="ruby-value">0</span>, <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">SEEK_END</span>)
+        <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">self</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">bufsize</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">default_bufsize</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">stat</span>.<span class="ruby-identifier">blksize</span> <span class="ruby-operator">||</span> <span class="ruby-value">8192</span>
+      <span class="ruby-identifier">size</span> = <span class="ruby-identifier">stat</span>.<span class="ruby-identifier">size</span>
+      <span class="ruby-keyword kw">begin</span>
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">bufsize</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">size</span>
+          <span class="ruby-identifier">seek</span>(<span class="ruby-value">0</span>, <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">SEEK_END</span>)
+          <span class="ruby-keyword kw">while</span> <span class="ruby-identifier">n</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword kw">and</span> <span class="ruby-identifier">tell</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword kw">do</span>
+            <span class="ruby-identifier">start</span> = <span class="ruby-identifier">tell</span>
+            <span class="ruby-identifier">seek</span>(<span class="ruby-operator">-</span><span class="ruby-identifier">bufsize</span>, <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">SEEK_CUR</span>)
+            <span class="ruby-identifier">buffer</span> = <span class="ruby-identifier">read</span>(<span class="ruby-identifier">bufsize</span>)
+            <span class="ruby-identifier">n</span> <span class="ruby-operator">-=</span> <span class="ruby-identifier">buffer</span>.<span class="ruby-identifier">count</span>(<span class="ruby-value str">&quot;\n&quot;</span>)
+            <span class="ruby-identifier">seek</span>(<span class="ruby-operator">-</span><span class="ruby-identifier">bufsize</span>, <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">SEEK_CUR</span>)
+          <span class="ruby-keyword kw">end</span>
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-identifier">seek</span>(<span class="ruby-value">0</span>, <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">SEEK_SET</span>)
+          <span class="ruby-identifier">buffer</span> = <span class="ruby-identifier">read</span>(<span class="ruby-identifier">size</span>)
+          <span class="ruby-identifier">n</span> <span class="ruby-operator">-=</span> <span class="ruby-identifier">buffer</span>.<span class="ruby-identifier">count</span>(<span class="ruby-value str">&quot;\n&quot;</span>)
+          <span class="ruby-identifier">seek</span>(<span class="ruby-value">0</span>, <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">SEEK_SET</span>)
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">EINVAL</span>
+        <span class="ruby-identifier">size</span> = <span class="ruby-identifier">tell</span>
+        <span class="ruby-keyword kw">retry</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">pos</span> = <span class="ruby-value">-1</span>
+      <span class="ruby-keyword kw">while</span> <span class="ruby-identifier">n</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>  <span class="ruby-comment cmt"># forward if we are too far back</span>
+        <span class="ruby-identifier">pos</span> = <span class="ruby-identifier">buffer</span>.<span class="ruby-identifier">index</span>(<span class="ruby-value str">&quot;\n&quot;</span>, <span class="ruby-identifier">pos</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)
+        <span class="ruby-identifier">n</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">seek</span>(<span class="ruby-identifier">pos</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>, <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">SEEK_CUR</span>)
+      <span class="ruby-keyword kw">self</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000002">
+                    
+                    <a name="M000002"></a><b>forward</b>(n = 0)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Skip the first <tt>n</tt> lines of this file. The default is to don&#8217;t
+skip any lines at all and start at the beginning of this file.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000002_source')" id="l_M000002_source">show</a>
+                        
+                    </p>
+                    <div id="M000002_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/file/tail.rb, line 99</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">forward</span>(<span class="ruby-identifier">n</span> = <span class="ruby-value">0</span>)
+      <span class="ruby-identifier">seek</span>(<span class="ruby-value">0</span>, <span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">SEEK_SET</span>)
+      <span class="ruby-keyword kw">while</span> <span class="ruby-identifier">n</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword kw">and</span> <span class="ruby-keyword kw">not</span> <span class="ruby-identifier">eof?</span>
+        <span class="ruby-identifier">readline</span>
+        <span class="ruby-identifier">n</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">self</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000004">
+                    
+                    <a name="M000004"></a><b>tail</b>(n = nil)
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+This method tails this file and yields to the given block for every new
+line that is read. If no block is given an array of those lines is returned
+instead. (In this case it&#8217;s better to use a reasonable value for
+<tt>n</tt> or set the <tt><a
+href="Tail.html#return_if_eof">return_if_eof</a></tt> or <tt><a
+href="Tail.html#break_if_eof">break_if_eof</a></tt> attribute to a true
+value to stop the method call from blocking.)
+</p>
+<p>
+If the argument <tt>n</tt> is given, only the next <tt>n</tt> lines are
+read and the method call returns. Otherwise this method call doesn&#8217;t
+return, but yields to block for every new line read from this file for
+ever.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000004_source')" id="l_M000004_source">show</a>
+                        
+                    </p>
+                    <div id="M000004_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/file/tail.rb, line 165</span>
+    <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">tail</span>(<span class="ruby-identifier">n</span> = <span class="ruby-keyword kw">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>) <span class="ruby-comment cmt"># :yields: line</span>
+      <span class="ruby-ivar">@n</span> = <span class="ruby-identifier">n</span>
+      <span class="ruby-identifier">result</span> = []
+      <span class="ruby-identifier">array_result</span> = <span class="ruby-keyword kw">false</span>
+      <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">block</span>
+        <span class="ruby-identifier">block</span> = <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span> <span class="ruby-identifier">result</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">line</span> }
+        <span class="ruby-identifier">array_result</span> = <span class="ruby-keyword kw">true</span>
+      <span class="ruby-keyword kw">end</span>
+      <span class="ruby-identifier">preset_attributes</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@lines</span>
+      <span class="ruby-identifier">loop</span> <span class="ruby-keyword kw">do</span>
+        <span class="ruby-keyword kw">begin</span>
+          <span class="ruby-identifier">restat</span>
+          <span class="ruby-identifier">read_line</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+          <span class="ruby-keyword kw">redo</span>
+        <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">ReopenException</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+          <span class="ruby-keyword kw">until</span> <span class="ruby-identifier">eof?</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@n</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+            <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-identifier">readline</span>
+            <span class="ruby-ivar">@n</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@n</span>
+          <span class="ruby-keyword kw">end</span>
+          <span class="ruby-identifier">reopen_file</span>(<span class="ruby-identifier">e</span>.<span class="ruby-identifier">mode</span>)
+          <span class="ruby-ivar">@after_reopen</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword kw">self</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@after_reopen</span>
+        <span class="ruby-keyword kw">rescue</span> <span class="ruby-constant">ReturnException</span>
+          <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">array_result</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">result</span> <span class="ruby-operator">:</span> <span class="ruby-keyword kw">nil</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span>
+    <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+</html>    

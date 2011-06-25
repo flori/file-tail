@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>File::Tail::Tailer</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+    <script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+    <script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>     
+    <div class="banner">
+        <h1>
+            <span class="type">Class</span> 
+            File::Tail::Tailer 
+            
+                <span class="parent">&lt; 
+                    
+                    ::Thread
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/lib/file/tail/tailer_rb.html">lib/file/tail/tailer.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+    
+    <div class="description">
+        <p>
+This class supervises activity on a tailed fail and collects newly read
+lines until the <a href="Group.html">Tail::Group</a> fetches and processes
+them.
+</p>
+
+    </div>
+    
+
+    
+
+    
+    
+
+    
+    
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+    
+        <dt>M</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000014">method_missing</a></li>
+                
+            </ul>
+        </dd>
+    
+        <dt>P</dt>
+        <dd>
+            <ul>
+                
+                <li><a href="#M000013">pending_lines</a>,</li>
+                
+                <li><a href="#M000012">pending_lines?</a></li>
+                
+            </ul>
+        </dd>
+    
+    </dl>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+            <div class="sectiontitle">Instance Public methods</div>
+            
+            <div class="method">
+                <div class="title" id="M000014">
+                    
+                    <a name="M000014"></a><b>method_missing</b>(id, *args, &amp;block)
+                    
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000014_source')" id="l_M000014_source">show</a>
+                        
+                    </p>
+                    <div id="M000014_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/file/tail/tailer.rb, line 20</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">method_missing</span>(<span class="ruby-identifier">id</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+        <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span>(<span class="ruby-identifier">value</span> = <span class="ruby-keyword kw">self</span>[<span class="ruby-identifier">id</span>]).<span class="ruby-identifier">nil?</span>
+          <span class="ruby-identifier">value</span>
+        <span class="ruby-keyword kw">else</span>
+          <span class="ruby-keyword kw">super</span>
+        <span class="ruby-keyword kw">end</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000013">
+                    
+                    <a name="M000013"></a><b>pending_lines</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+Fetch all the pending lines from this <a href="Tailer.html">Tailer</a> and
+thereby remove them from the Tailer&#8217;s queue.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000013_source')" id="l_M000013_source">show</a>
+                        
+                    </p>
+                    <div id="M000013_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/file/tail/tailer.rb, line 14</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">pending_lines</span>
+        <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">queue</span>.<span class="ruby-identifier">size</span>) { <span class="ruby-identifier">queue</span>.<span class="ruby-identifier">deq</span>(<span class="ruby-keyword kw">true</span>) }
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="method">
+                <div class="title" id="M000012">
+                    
+                    <a name="M000012"></a><b>pending_lines?</b>()
+                    
+                </div>
+                
+                <div class="description">
+                  <p>
+True if there are any lines pending on this <a
+href="Tailer.html">Tailer</a>, false otherwise.
+</p>
+
+                </div>
+                
+                
+                
+                
+                <div class="sourcecode">
+                    <p class="source-link">
+                        Source: <a href="javascript:toggleSource('M000012_source')" id="l_M000012_source">show</a>
+                        
+                    </p>
+                    <div id="M000012_source" class="dyn-source">
+                        <pre><span class="ruby-comment cmt"># File lib/file/tail/tailer.rb, line 9</span>
+      <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">pending_lines?</span>
+        <span class="ruby-operator">!</span><span class="ruby-identifier">queue</span>.<span class="ruby-identifier">empty?</span>
+      <span class="ruby-keyword kw">end</span></pre>
+                    </div>
+                </div>
+                
+            </div>
+            
+</div>
+    </div>
+  </body>
+</html>    
