@@ -58,7 +58,7 @@ class File
       # Iterate over all tailers in this group yielding to +block+ for each of
       # them.
       def each_tailer(&block)
-        @tailers.list.map { |t| t }.map(&block)
+        @tailers.list.map(&block)
       end
 
       # Stop all tailers in this group at once.

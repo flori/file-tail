@@ -2,7 +2,7 @@
 
 source :rubygems
 
-gem 'spruz', '~>0.2'
+gemspec
 
 group :development do
   gem 'sdoc'
