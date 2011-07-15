@@ -1,3 +1,4 @@
+2011-07-15 * 1.0.7 * Use gem_hadar to shorten Rakefile.
 2011-06-25 * 1.0.6 * Create a gem spec file again.
                    * Added a File::Tail::Group to tail multiple files more easily.
 2010-03-25 * 1.0.5 * Added rtail executable, a nice app to supervise logfiles

@@ -3,8 +3,3 @@
 source :rubygems
 
 gemspec
-
-group :development do
-  gem 'sdoc'
-  gem 'rcov'
-end
