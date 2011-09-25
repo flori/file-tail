@@ -8,8 +8,6 @@ GemHadar do
   author      'Florian Frank'
   email       'flori@ping.de'
   homepage    "http://github.com/flori/#{name}"
-  summary     'Library for the development of Ruby Gems'
-  description 'This library contains some useful functionality to support the development of Ruby Gems' 
   summary     "#{path_name.camelize} for Ruby"
   description 'Library to tail files in Ruby'
   test_dir    'tests'
