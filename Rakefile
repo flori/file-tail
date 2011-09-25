@@ -14,7 +14,7 @@ GemHadar do
   ignore      '.*.sw[pon]', 'pkg', 'Gemfile.lock'
   readme      'README.rdoc'
 
-  dependency  'spruz', '~>0.2'
+  dependency  'tins', '~>0.3'
 
   install_library do
     cd 'lib' do

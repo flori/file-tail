@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
 require 'file/tail'
-require 'spruz/go'
-include Spruz::GO
+require 'tins/go'
+include Tins::GO
 require 'thread'
 Thread.abort_on_exception = true
 
