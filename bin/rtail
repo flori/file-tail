@@ -28,7 +28,7 @@ $logfiles = File::Tail::Group.new
 
 def add_logfiles(logfiles)
   logfiles = logfiles.map { |l| File.expand_path(l) }
-  $opt['m'] and logfiles = 
+  $opt['m'] and logfiles =
     logfiles.select { |l| !$opt['m'] || File.fnmatch?($opt['m'], File.basename(l)) }
   for l in logfiles
     $logfiles.each_file.any? { |f| l == f.path } and next

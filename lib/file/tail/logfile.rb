@@ -42,7 +42,7 @@ class File
       def self.open(filename, opts = {}, &block) # :yields: file
         file = new filename
         opts.each do |o, v|
-          writer = o.to_s + "=" 
+          writer = o.to_s + "="
           file.__send__(writer, v) if file.respond_to? writer
         end
         if opts.key?(:wind) or opts.key?(:rewind)

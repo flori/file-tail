@@ -26,12 +26,12 @@ class File
     class BreakException < TailException; end
 
     # The ReopenException is raised internally if File::Tail
-    # gets suspicious something unusual has happend to 
+    # gets suspicious something unusual has happend to
     # the tailed file, e. g., it was rotated away. The exception
     # is caught and an attempt to reopen it is made.
     class ReopenException < TailException
       attr_reader :mode
-    
+
       # Creates an ReopenException object. The mode defaults to
       # <code>:bottom</code> which indicates that the file
       # should be tailed beginning from the end. <code>:top</code>
@@ -111,7 +111,7 @@ class File
     #
     # The additional argument <code>bufsize</code> is
     # used to determine the buffer size that is used to step through
-    # the file backwards. It defaults to the block size of the 
+    # the file backwards. It defaults to the block size of the
     # filesystem this file belongs to or 8192 bytes if this cannot
     # be determined.
     def backward(n = 0, bufsize = nil)
@@ -188,7 +188,7 @@ class File
         end
       end
     end
-    
+
     private
 
     def read_line(&block)
@@ -265,7 +265,7 @@ class File
       sleep @interval
       @no_read += @interval
     end
-    
+
     def reopen_file(mode)
       $DEBUG and $stdout.print "Reopening '#{path}', mode = #{mode}.\n"
       @no_read = 0
@@ -274,7 +274,7 @@ class File
         backward
       end
     rescue Errno::ESTALE, Errno::ENOENT
-      if @reopen_deleted    
+      if @reopen_deleted
         sleep @max_interval
         retry
       else
@@ -284,7 +284,7 @@ class File
 
     def output_debug_information
       $DEBUG or return
-      STDERR.puts({ 
+      STDERR.puts({
         :path     => path,
         :lines    => @lines,
         :interval => @interval,
