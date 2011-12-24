@@ -11,7 +11,7 @@ GemHadar do
   summary     "#{path_name.camelize} for Ruby"
   description 'Library to tail files in Ruby'
   test_dir    'tests'
-  ignore      '.*.sw[pon]', 'pkg', 'Gemfile.lock'
+  ignore      '.*.sw[pon]', 'pkg', 'Gemfile.lock', 'coverage'
   readme      'README.rdoc'
 
   dependency  'tins', '~>0.3'

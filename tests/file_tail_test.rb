@@ -1,18 +1,12 @@
 #!/usr/bin/env ruby
 
-base = File.basename(Dir.pwd)
-if base == 'tests' || base =~ /file-tail/
-    Dir.chdir('..') if base == 'tests'
-    $LOAD_PATH.unshift(File.join(Dir.pwd, 'lib'))
-end
-
-require 'test/unit'
+require 'test_helper'
 require 'file/tail'
 require 'timeout'
 require 'thread'
 Thread.abort_on_exception = true
 
-class TestFileTail < Test::Unit::TestCase
+class FileTailTest < Test::Unit::TestCase
   include File::Tail
 
   def setup
