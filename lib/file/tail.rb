@@ -272,6 +272,8 @@ class File
       reopen(path)
       if mode == :bottom
         backward
+      elsif mode == :top
+        forward
       end
     rescue Errno::ESTALE, Errno::ENOENT
       if @reopen_deleted

@@ -289,6 +289,68 @@ class FileTailTest < Test::Unit::TestCase
     assert reopened
   end
 
+  def test_tail_change
+    return if File::PATH_SEPARATOR == ';' # Grmpf! Windows...
+    @in.forward
+    reopened = false
+    @in.after_reopen { |f| reopened = true }
+    lines = []
+    logger = Thread.new do
+      begin
+        timeout(2) do
+          @in.tail(110) do |l|
+            lines << l
+          end
+        end
+      rescue TimeoutError
+      end
+    end
+    appender = Thread.new do
+      until logger.stop?
+        sleep 0.1
+      end
+      @out.close
+      File.unlink(@out.path)
+      @out = File.new(@in.path, "wb")
+      append(@out, 10)
+    end
+    appender.join
+    logger.join
+    assert_equal(110, lines.size)
+    assert reopened
+  end
+
+  def test_tail_change2
+    return if File::PATH_SEPARATOR == ';' # Grmpf! Windows...
+    @in.forward
+    reopened = false
+    @in.after_reopen { |f| reopened = true }
+    lines = []
+    logger = Thread.new do
+      begin
+        timeout(2) do
+          @in.tail(110) do |l|
+            lines << l
+          end
+        end
+      rescue TimeoutError
+      end
+    end
+    appender = Thread.new do
+      until logger.stop?
+        sleep 0.1
+      end
+      @out.truncate 0
+      @out.close
+      @out = File.new(@in.path, "wb")
+      append(@out, 10)
+    end
+    appender.join
+    logger.join
+    assert_equal(110, lines.size)
+    assert reopened
+  end
+
   def teardown
     @in.close
     @out.close
