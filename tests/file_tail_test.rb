@@ -164,7 +164,7 @@ class FileTailTest < Test::Unit::TestCase
     lines = []
     logger = Thread.new do
       begin
-        timeout(1) do
+        timeout(10) do
           @in.tail do |l|
             lines << l
           end

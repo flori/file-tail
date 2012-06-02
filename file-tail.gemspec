@@ -6,15 +6,15 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Florian Frank"]
-  s.date = "2012-05-31"
+  s.date = "2012-06-02"
   s.description = "Library to tail files in Ruby"
   s.email = "flori@ping.de"
-  s.extra_rdoc_files = ["README.rdoc", "lib/file/tail/group.rb", "lib/file/tail/line_extension.rb", "lib/file/tail/logfile.rb", "lib/file/tail/tailer.rb", "lib/file/tail/version.rb", "lib/file/tail.rb", "lib/file-tail.rb"]
+  s.extra_rdoc_files = ["README.rdoc", "lib/file-tail.rb", "lib/file/tail.rb", "lib/file/tail/group.rb", "lib/file/tail/line_extension.rb", "lib/file/tail/logfile.rb", "lib/file/tail/tailer.rb", "lib/file/tail/version.rb"]
   s.files = [".gitignore", ".travis.yml", "CHANGES", "COPYING", "Gemfile", "README.rdoc", "Rakefile", "VERSION", "bin/rtail", "examples/pager.rb", "examples/tail.rb", "file-tail.gemspec", "lib/file-tail.rb", "lib/file/tail.rb", "lib/file/tail/group.rb", "lib/file/tail/line_extension.rb", "lib/file/tail/logfile.rb", "lib/file/tail/tailer.rb", "lib/file/tail/version.rb", "tests/file_tail_group_test.rb", "tests/file_tail_test.rb", "tests/test_helper.rb"]
   s.homepage = "http://github.com/flori/file-tail"
   s.rdoc_options = ["--title", "File-tail - File::Tail for Ruby", "--main", "README.rdoc"]
   s.require_paths = ["lib"]
-  s.rubygems_version = "1.8.24"
+  s.rubygems_version = "1.8.12"
   s.summary = "File::Tail for Ruby"
   s.test_files = ["tests/file_tail_group_test.rb", "tests/file_tail_test.rb", "tests/test_helper.rb"]
 

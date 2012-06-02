@@ -1,4 +1,5 @@
 *.rbc
+.rbx
 .*.sw[pon]
 Gemfile.lock
 coverage
