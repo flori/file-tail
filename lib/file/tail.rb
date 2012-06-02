@@ -97,7 +97,7 @@ class File
     # Skip the first <code>n</code> lines of this file. The default is to don't
     # skip any lines at all and start at the beginning of this file.
     def forward(n = 0)
-      seek(0, File::SEEK_SET)
+      rewind
       while n > 0 and not eof?
         readline
         n -= 1
@@ -132,10 +132,10 @@ class File
             seek(-bufsize, File::SEEK_CUR)
           end
         else
-          seek(0, File::SEEK_SET)
+          rewind
           buffer = read(size)
           n -= buffer.count("\n")
-          seek(0, File::SEEK_SET)
+          rewind
         end
       rescue Errno::EINVAL
         size = tell

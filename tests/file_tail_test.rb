@@ -293,6 +293,7 @@ class FileTailTest < Test::Unit::TestCase
     return if File::PATH_SEPARATOR == ';' # Grmpf! Windows...
     @in.forward
     reopened = false
+    assert_equal 0, @in.lineno
     @in.after_reopen { |f| reopened = true }
     lines = []
     logger = Thread.new do
@@ -318,12 +319,14 @@ class FileTailTest < Test::Unit::TestCase
     logger.join
     assert_equal(110, lines.size)
     assert reopened
+    assert_equal 10, @in.lineno
   end
 
   def test_tail_change2
     return if File::PATH_SEPARATOR == ';' # Grmpf! Windows...
     @in.forward
     reopened = false
+    assert_equal 0, @in.lineno
     @in.after_reopen { |f| reopened = true }
     lines = []
     logger = Thread.new do
@@ -349,6 +352,7 @@ class FileTailTest < Test::Unit::TestCase
     logger.join
     assert_equal(110, lines.size)
     assert reopened
+    assert_equal 10, @in.lineno
   end
 
   def teardown
