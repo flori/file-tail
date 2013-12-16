@@ -102,11 +102,7 @@ class File
     def forward(n = 0)
       rewind
       while n > 0 and not eof?
-        if line_separator
-          readline(line_separator)
-        else
-          readline
-        end
+        readline(@line_separator)
         n -= 1
       end
       self
@@ -185,11 +181,7 @@ class File
           redo
         rescue ReopenException => e
           until eof? || @n == 0
-            if line_separator
-              block.call readline(line_separator)
-            else
-              block.call readline
-            end
+            block.call readline(@line_separator)
             @n -= 1 if @n
           end
           reopen_file(e.mode)
@@ -205,11 +197,7 @@ class File
     def read_line(&block)
       if @n
         until @n == 0
-          if line_separator
-            block.call readline(line_separator)
-          else
-            block.call readline
-          end
+          block.call readline(@line_separator)
           @lines   += 1
           @no_read = 0
           @n       -= 1
@@ -217,11 +205,7 @@ class File
         end
         raise ReturnException
       else
-        if line_separator
-          block.call readline(line_separator)
-        else
-          block.call readline
-        end
+        block.call readline(@line_separator)
         @lines   += 1
         @no_read = 0
         output_debug_information
@@ -243,6 +227,7 @@ class File
       @break_if_eof         = false if @break_if_eof.nil?
       @return_if_eof        = false if @return_if_eof.nil?
       @max_interval         ||= 10
+      @line_separator       ||= "$/"
       @interval             ||= @max_interval
       @suspicious_interval  ||= 60
       @lines                = 0
