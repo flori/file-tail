@@ -227,7 +227,7 @@ class File
       @break_if_eof         = false if @break_if_eof.nil?
       @return_if_eof        = false if @return_if_eof.nil?
       @max_interval         ||= 10
-      @line_separator       ||= "$/"
+      @line_separator       ||= $/
       @interval             ||= @max_interval
       @suspicious_interval  ||= 60
       @lines                = 0
