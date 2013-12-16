@@ -103,7 +103,7 @@ class File
       rewind
       while n > 0 and not eof?
         if line_separator
-          readline(:sep => line_separator)
+          readline(line_separator)
         else
           readline
         end
@@ -186,7 +186,7 @@ class File
         rescue ReopenException => e
           until eof? || @n == 0
             if line_separator
-              block.call readline(:sep => line_separator)
+              block.call readline(line_separator)
             else
               block.call readline
             end
@@ -206,7 +206,7 @@ class File
       if @n
         until @n == 0
           if line_separator
-            block.call readline(:sep => line_separator)
+            block.call readline(line_separator)
           else
             block.call readline
           end
@@ -218,7 +218,7 @@ class File
         raise ReturnException
       else
         if line_separator
-          block.call readline(:sep => line_separator)
+          block.call readline(line_separator)
         else
           block.call readline
         end
