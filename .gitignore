@@ -1,5 +1,7 @@
 *.rbc
 .*.sw[pon]
+.AppleDouble
+.bundle
 .rbx
 Gemfile.lock
 coverage

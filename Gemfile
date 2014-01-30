@@ -1,6 +1,6 @@
 # vim: set filetype=ruby et sw=2 ts=2:
 
-source :rubygems
+source 'https://rubygems.org'
 
 gemspec
 group :development do
