@@ -100,6 +100,7 @@ class File
     # Skip the first <code>n</code> lines of this file. The default is to don't
     # skip any lines at all and start at the beginning of this file.
     def forward(n = 0)
+      preset_attributes unless @lines
       rewind
       while n > 0 and not eof?
         readline(@line_separator)
@@ -118,6 +119,7 @@ class File
     # filesystem this file belongs to or 8192 bytes if this cannot
     # be determined.
     def backward(n = 0, bufsize = nil)
+      preset_attributes unless @lines
       if n <= 0
         seek(0, File::SEEK_END)
         return self
@@ -131,13 +133,13 @@ class File
             start = tell
             seek(-bufsize, File::SEEK_CUR)
             buffer = read(bufsize)
-            n -= buffer.count("\n")
+            n -= buffer.count(@line_separator)
             seek(-bufsize, File::SEEK_CUR)
           end
         else
           rewind
           buffer = read(size)
-          n -= buffer.count("\n")
+          n -= buffer.count(@line_separator)
           rewind
         end
       rescue Errno::EINVAL
@@ -146,7 +148,7 @@ class File
       end
       pos = -1
       while n < 0  # forward if we are too far back
-        pos = buffer.index("\n", pos + 1)
+        pos = buffer.index(@line_separator, pos + 1)
         n += 1
       end
       seek(pos + 1, File::SEEK_CUR)
