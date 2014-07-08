@@ -14,7 +14,7 @@ GemHadar do
   ignore      '.*.sw[pon]', 'pkg', 'Gemfile.lock', 'coverage', '*.rbc', '.rbx'
   readme      'README.rdoc'
 
-  dependency  'tins', '~>0.5'
+  dependency  'tins', '~>1.0'
 
   development_dependency 'test-unit', '~>2.4.0'
 
