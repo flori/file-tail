@@ -13,8 +13,9 @@ GemHadar do
   test_dir    'tests'
   ignore      '.*.sw[pon]', 'pkg', 'Gemfile.lock', 'coverage', '*.rbc', '.rbx', '.AppleDouble', '.bundle'
   readme      'README.rdoc'
+  licenses << 'GPL-2.0'
 
-  dependency  'tins', '~>0.5'
+  dependency  'tins', '~>1.0'
 
   development_dependency 'test-unit', '~>2.4.0'
 
