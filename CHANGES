@@ -1,3 +1,4 @@
+2014-09-26 * 1.1.0 * Depend on tins ~ 1.0
 2012-05-31 * 1.0.10 * Use rewind to force IO#lineno to be reset.
 2012-05-31 * 1.0.9 * Reopen file in :top mode at the beginning.
 2011-12-24 * 1.0.8 * Support simplecov.
