@@ -59,58 +59,58 @@ class FileTailTest < Test::Unit::TestCase
   end
 
   def test_tail_with_block_without_n
-    timeout(10) do
+    Timeout::timeout(10) do
       lines = []
       @in.backward(1)
-      assert_raises(TimeoutError) do
-        timeout(1) { @in.tail { |l| lines << l } }
+      assert_raises(Timeout::Error) do
+        Timeout::timeout(1) { @in.tail { |l| lines << l } }
       end
       assert_equal(1, lines.size)
       #
       lines = []
       @in.backward(10)
-      assert_raises(TimeoutError) do
-        timeout(1) { @in.tail { |l| lines << l } }
+      assert_raises(Timeout::Error) do
+        Timeout::timeout(1) { @in.tail { |l| lines << l } }
       end
       assert_equal(10, lines.size)
       #
       lines = []
       @in.backward(100)
-      assert_raises(TimeoutError) do
-        timeout(1) { @in.tail { |l| lines << l } }
+      assert_raises(Timeout::Error) do
+        Timeout::timeout(1) { @in.tail { |l| lines << l } }
       end
       assert_equal(100, lines.size)
       #
       lines = []
       @in.backward(101)
-      assert_raises(TimeoutError) do
-        timeout(1) { @in.tail { |l| lines << l } }
+      assert_raises(Timeout::Error) do
+        Timeout::timeout(1) { @in.tail { |l| lines << l } }
       end
     end
   end
 
   def test_tail_with_block_with_n
-    timeout(10) do
+    Timeout::timeout(10) do
       @in.backward(1)
       lines = []
-      timeout(1) { @in.tail(0) { |l| lines << l } }
+      Timeout::timeout(1) { @in.tail(0) { |l| lines << l } }
       assert_equal(0, lines.size)
       #
       @in.backward(1)
       lines = []
-      timeout(1) { @in.tail(1) { |l| lines << l } }
+      Timeout::timeout(1) { @in.tail(1) { |l| lines << l } }
       assert_equal(1, lines.size)
       #
       @in.backward(10)
       lines = []
-      timeout(1) { @in.tail(10) { |l| lines << l } }
+      Timeout::timeout(1) { @in.tail(10) { |l| lines << l } }
       assert_equal(10, lines.size)
       #
       @in.backward(100)
       lines = []
       @in.backward(1)
-      assert_raises(TimeoutError) do
-        timeout(1) { @in.tail(2) { |l| lines << l } }
+      assert_raises(Timeout::Error) do
+        Timeout::timeout(1) { @in.tail(2) { |l| lines << l } }
       end
       assert_equal(1, lines.size)
       #
@@ -118,27 +118,27 @@ class FileTailTest < Test::Unit::TestCase
   end
 
   def test_tail_without_block_with_n
-    timeout(10) do
+    Timeout::timeout(10) do
       @in.backward(1)
       lines = []
-      timeout(1) { lines += @in.tail(0) }
+      Timeout::timeout(1) { lines += @in.tail(0) }
       assert_equal(0, lines.size)
       #
       @in.backward(1)
       lines = []
-      timeout(1) { lines += @in.tail(1) }
+      Timeout::timeout(1) { lines += @in.tail(1) }
       assert_equal(1, lines.size)
       #
       @in.backward(10)
       lines = []
-      timeout(1) { lines += @in.tail(10) }
+      Timeout::timeout(1) { lines += @in.tail(10) }
       assert_equal(10, lines.size)
       #
       @in.backward(100)
       lines = []
       @in.backward(1)
-      assert_raises(TimeoutError) do
-        timeout(1) { lines += @in.tail(2) }
+      assert_raises(Timeout::Error) do
+        Timeout::timeout(1) { lines += @in.tail(2) }
       end
       assert_equal(0, lines.size)
     end
@@ -149,8 +149,8 @@ class FileTailTest < Test::Unit::TestCase
     lines = []
     logger = Thread.new do
       begin
-        timeout(1) { @in.tail { |l| lines << l } }
-      rescue TimeoutError
+        Timeout::timeout(1) { @in.tail { |l| lines << l } }
+      rescue Timeout::Error
       end
     end
     appender = Thread.new { append(@out, 10) }
@@ -164,12 +164,12 @@ class FileTailTest < Test::Unit::TestCase
     lines = []
     logger = Thread.new do
       begin
-        timeout(10) do
+        Timeout::timeout(10) do
           @in.tail do |l|
             lines << l
           end
         end
-      rescue TimeoutError
+      rescue Timeout::Error
       end
     end
     appender = Thread.new do
@@ -194,12 +194,12 @@ class FileTailTest < Test::Unit::TestCase
     lines = []
     logger = Thread.new do
       begin
-        timeout(2) do
+        Timeout::timeout(2) do
           @in.tail do |l|
             lines << l
           end
         end
-      rescue TimeoutError
+      rescue Timeout::Error
       end
     end
     appender = Thread.new do
@@ -225,12 +225,12 @@ class FileTailTest < Test::Unit::TestCase
     lines = []
     logger = Thread.new do
       begin
-        timeout(2) do
+        Timeout::timeout(2) do
           @in.tail do |l|
             lines << l
           end
         end
-      rescue TimeoutError
+      rescue Timeout::Error
       end
     end
     appender = Thread.new do
@@ -261,12 +261,12 @@ class FileTailTest < Test::Unit::TestCase
     lines = []
     logger = Thread.new do
       begin
-        timeout(2) do
+        Timeout::timeout(2) do
           @in.tail(15) do |l|
             lines << l
           end
         end
-      rescue TimeoutError
+      rescue Timeout::Error
       end
     end
     appender = Thread.new do
@@ -298,12 +298,12 @@ class FileTailTest < Test::Unit::TestCase
     lines = []
     logger = Thread.new do
       begin
-        timeout(2) do
+        Timeout::timeout(2) do
           @in.tail(110) do |l|
             lines << l
           end
         end
-      rescue TimeoutError
+      rescue Timeout::Error
       end
     end
     appender = Thread.new do
@@ -331,12 +331,12 @@ class FileTailTest < Test::Unit::TestCase
     lines = []
     logger = Thread.new do
       begin
-        timeout(2) do
+        Timeout::timeout(2) do
           @in.tail(110) do |l|
             lines << l
           end
         end
-      rescue TimeoutError
+      rescue Timeout::Error
       end
     end
     appender = Thread.new do
