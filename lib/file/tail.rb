@@ -100,7 +100,7 @@ class File
     # Skip the first <code>n</code> lines of this file. The default is to don't
     # skip any lines at all and start at the beginning of this file.
     def forward(n = 0)
-      preset_attributes unless @lines
+      preset_attributes unless defined? @lines
       rewind
       while n > 0 and not eof?
         readline(@line_separator)
@@ -119,7 +119,7 @@ class File
     # filesystem this file belongs to or 8192 bytes if this cannot
     # be determined.
     def backward(n = 0, bufsize = nil)
-      preset_attributes unless @lines
+      preset_attributes unless defined? @lines
       if n <= 0
         seek(0, File::SEEK_END)
         return self
