@@ -1,3 +1,5 @@
+2016-04-19 * 1.2.0 * Make line separator configurable
+2016-04-19 * 1.1.1 * Fix tests on Ruby 2.3.0
 2014-09-26 * 1.1.0 * Depend on tins ~ 1.0
 2012-05-31 * 1.0.10 * Use rewind to force IO#lineno to be reset.
 2012-05-31 * 1.0.9 * Reopen file in :top mode at the beginning.
