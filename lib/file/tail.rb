@@ -125,7 +125,6 @@ class File
         if bufsize < size
           seek(0, File::SEEK_END)
           while n > 0 and tell > 0 do
-            start = tell
             seek(-bufsize, File::SEEK_CUR)
             buffer = read(bufsize)
             n -= buffer.count("\n")
@@ -170,7 +169,7 @@ class File
         block = lambda { |line| result << line }
         array_result = true
       end
-      preset_attributes unless @lines
+      preset_attributes unless defined? @lines
       loop do
         begin
           restat
@@ -182,7 +181,7 @@ class File
             @n -= 1 if @n
           end
           reopen_file(e.mode)
-          @after_reopen.call self if @after_reopen
+          @after_reopen.call self if defined? @after_reopen
         rescue ReturnException
           return array_result ? result : nil
         end
@@ -219,15 +218,16 @@ class File
     end
 
     def preset_attributes
-      @reopen_deleted       = true if @reopen_deleted.nil?
-      @reopen_suspicious    = true if @reopen_suspicious.nil?
-      @break_if_eof         = false if @break_if_eof.nil?
-      @return_if_eof        = false if @return_if_eof.nil?
+      @reopen_deleted       = true  unless defined? @reopen_deleted
+      @reopen_suspicious    = true  unless defined? @reopen_suspicious
+      @break_if_eof         = false unless defined? @break_if_eof
+      @return_if_eof        = false unless defined? @return_if_eof
       @max_interval         ||= 10
       @interval             ||= @max_interval
       @suspicious_interval  ||= 60
       @lines                = 0
       @no_read              = 0
+      @stat                 = nil
     end
 
     def restat
