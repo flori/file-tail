@@ -94,12 +94,16 @@ class File
     # value from the filesystem block size.
     attr_accessor :default_bufsize
 
+    # Override the default line separator
+    attr_accessor :line_separator
+
     # Skip the first <code>n</code> lines of this file. The default is to don't
     # skip any lines at all and start at the beginning of this file.
     def forward(n = 0)
+      preset_attributes unless @lines
       rewind
       while n > 0 and not eof?
-        readline
+        readline(@line_separator)
         n -= 1
       end
       self
@@ -115,6 +119,7 @@ class File
     # filesystem this file belongs to or 8192 bytes if this cannot
     # be determined.
     def backward(n = 0, bufsize = nil)
+      preset_attributes unless @lines
       if n <= 0
         seek(0, File::SEEK_END)
         return self
@@ -127,13 +132,13 @@ class File
           while n > 0 and tell > 0 do
             seek(-bufsize, File::SEEK_CUR)
             buffer = read(bufsize)
-            n -= buffer.count("\n")
+            n -= buffer.count(@line_separator)
             seek(-bufsize, File::SEEK_CUR)
           end
         else
           rewind
           buffer = read(size)
-          n -= buffer.count("\n")
+          n -= buffer.count(@line_separator)
           rewind
         end
       rescue Errno::EINVAL
@@ -142,7 +147,7 @@ class File
       end
       pos = -1
       while n < 0  # forward if we are too far back
-        pos = buffer.index("\n", pos + 1)
+        pos = buffer.index(@line_separator, pos + 1)
         n += 1
       end
       seek(pos + 1, File::SEEK_CUR)
@@ -177,7 +182,7 @@ class File
           redo
         rescue ReopenException => e
           until eof? || @n == 0
-            block.call readline
+            block.call readline(@line_separator)
             @n -= 1 if @n
           end
           reopen_file(e.mode)
@@ -193,7 +198,7 @@ class File
     def read_line(&block)
       if @n
         until @n == 0
-          block.call readline
+          block.call readline(@line_separator)
           @lines   += 1
           @no_read = 0
           @n       -= 1
@@ -201,7 +206,7 @@ class File
         end
         raise ReturnException
       else
-        block.call readline
+        block.call readline(@line_separator)
         @lines   += 1
         @no_read = 0
         output_debug_information
@@ -223,6 +228,7 @@ class File
       @break_if_eof         = false unless defined? @break_if_eof
       @return_if_eof        = false unless defined? @return_if_eof
       @max_interval         ||= 10
+      @line_separator       ||= $/
       @interval             ||= @max_interval
       @suspicious_interval  ||= 60
       @lines                = 0
