@@ -247,9 +247,8 @@ class File
           @stat = nil
           raise ReopenException.new(:top)
         end
-      else
-        @stat = stat
       end
+      @stat = stat
     rescue Errno::ENOENT, Errno::ESTALE
       raise ReopenException
     end
