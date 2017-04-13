@@ -12,27 +12,11 @@ GemHadar do
   description 'Library to tail files in Ruby'
   test_dir    'tests'
   ignore      '.*.sw[pon]', 'pkg', 'Gemfile.lock', 'coverage', '*.rbc', '.rbx', '.AppleDouble', '.bundle'
-  readme      'README.rdoc'
-  licenses << 'GPL-2.0'
+  readme      'README.md'
+  licenses    << 'Apache-2.0'
+
 
   dependency  'tins', '~>1.0'
 
   development_dependency 'test-unit', '~>2.4.0'
-
-  install_library do
-    cd 'lib' do
-      libdir = CONFIG["sitelibdir"]
-
-      dest = File.join(libdir, 'file')
-      mkdir_p(dest)
-      dest = File.join(libdir, path_name)
-      install(path_name + '.rb', dest + '.rb', :verbose => true)
-      mkdir_p(dest)
-      for file in Dir[File.join(path_name, '*.rb')]
-        install(file, dest, :verbose => true)
-      end
-    end
-    bindir = CONFIG["bindir"]
-    install('bin/rtail', bindir, :verbose => true, :mode => 0755)
-  end
 end
