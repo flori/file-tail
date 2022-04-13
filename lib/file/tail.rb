@@ -250,7 +250,7 @@ class File
       end
       @stat = stat
     rescue Errno::ENOENT, Errno::ESTALE
-      raise ReopenException
+      raise ReopenException.new(:top)
     end
 
     def sleep_interval
