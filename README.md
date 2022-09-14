@@ -60,7 +60,7 @@ $ rake doc
 
 and the API documentation is generated.
 
-In the examples direcotry is a small example of tail and
+In the examples directory is a small example of tail and
 pager program that use this module. You also may want look
 at the end of examples/tail.rb for a little example.
 

@@ -17,7 +17,7 @@ class File
     class DeletedException < TailException; end
 
     # The ReturnException is raised and caught
-    # internally to implement "tail -10" behaviour.
+    # internally to implement "tail -10" behavior.
     class ReturnException < TailException; end
 
     # The BreakException is raised if the <code>break_if_eof</code>
@@ -26,7 +26,7 @@ class File
     class BreakException < TailException; end
 
     # The ReopenException is raised internally if File::Tail
-    # gets suspicious something unusual has happend to
+    # gets suspicious something unusual has happened to
     # the tailed file, e. g., it was rotated away. The exception
     # is caught and an attempt to reopen it is made.
     class ReopenException < TailException
@@ -66,14 +66,14 @@ class File
     attr_accessor :reopen_suspicious
 
     # The callback is called with _self_ as an argument after a reopen has
-    # occured. This allows a tailing script to find out, if a logfile has been
-    # rotated.
+    # occurred. This allows a tailing script to find out, if a logfile has
+    # been rotated.
     def after_reopen(&block)
       @after_reopen = block
     end
 
-    # This attribute is the invterval in seconds before File::Tail
-    # gets suspicious that something has happend to it's tailed file
+    # This attribute is the interval in seconds before File::Tail
+    # gets suspicious that something has happened to it's tailed file
     # and an attempt to reopen it is made.
     #
     # If the attribute <code>reopen_suspicious</code> is
