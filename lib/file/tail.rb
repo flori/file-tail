@@ -272,7 +272,7 @@ class File
     end
 
     def reopen_file(mode)
-      $DEBUG and $stdout.print "Reopening '#{path}', mode = #{mode}.\n"
+      debug? and $stdout.print "Reopening '#{path}', mode = #{mode}.\n"
       @no_read = 0
       reopen(path)
       if mode == :bottom
@@ -290,7 +290,7 @@ class File
     end
 
     def output_debug_information
-      $DEBUG or return
+      debug? or return
       STDERR.puts({
         :path     => path,
         :lines    => @lines,
@@ -299,6 +299,10 @@ class File
         :n        => @n,
       }.inspect)
       self
+    end
+
+    def debug?
+      ENV['FILE_TAIL_DEBUG'].to_i == 1
     end
   end
 end
