@@ -4,13 +4,16 @@ require 'test_helper'
 require 'file/tail'
 require 'timeout'
 require 'thread'
+require 'fileutils'
 Thread.abort_on_exception = true
 
 class FileTailTest < Test::Unit::TestCase
   include File::Tail
+  include FileUtils
 
   def setup
     @out = File.new(File.join(__dir__, "test.#$$"), "wb")
+    at_exit { rm_f File.expand_path(@out.path) }
     append(@out, 100)
     @in = File.new(@out.path, "rb")
     @in.extend(File::Tail)
