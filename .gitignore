@@ -3,6 +3,8 @@
 .AppleDouble
 .bundle
 .rbx
+.utilsrc
 Gemfile.lock
 coverage
+errors.lst
 pkg

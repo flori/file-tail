@@ -10,7 +10,7 @@ class FileTailTest < Test::Unit::TestCase
   include File::Tail
 
   def setup
-    @out = File.new("test.#$$", "wb")
+    @out = File.new(File.join(__dir__, "test.#$$"), "wb")
     append(@out, 100)
     @in = File.new(@out.path, "rb")
     @in.extend(File::Tail)
