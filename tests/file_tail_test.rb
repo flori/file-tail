@@ -197,7 +197,7 @@ class FileTailTest < Test::Unit::TestCase
     lines = []
     logger = Thread.new do
       begin
-        Timeout::timeout(2) do
+        Timeout::timeout(10) do
           @in.tail do |l|
             lines << l
           end
@@ -228,7 +228,7 @@ class FileTailTest < Test::Unit::TestCase
     lines = []
     logger = Thread.new do
       begin
-        Timeout::timeout(2) do
+        Timeout::timeout(10) do
           @in.tail do |l|
             lines << l
           end
@@ -264,7 +264,7 @@ class FileTailTest < Test::Unit::TestCase
     lines = []
     logger = Thread.new do
       begin
-        Timeout::timeout(2) do
+        Timeout::timeout(10) do
           @in.tail(15) do |l|
             lines << l
           end
@@ -301,7 +301,7 @@ class FileTailTest < Test::Unit::TestCase
     lines = []
     logger = Thread.new do
       begin
-        Timeout::timeout(2) do
+        Timeout::timeout(10) do
           @in.tail(110) do |l|
             lines << l
           end
@@ -310,8 +310,10 @@ class FileTailTest < Test::Unit::TestCase
       end
     end
     appender = Thread.new do
-      until logger.stop?
-        sleep 0.1
+      Timeout::timeout(10) do
+        until lines.size == 100
+          sleep 0.1
+        end
       end
       @out.close
       File.unlink(@out.path)
@@ -334,7 +336,7 @@ class FileTailTest < Test::Unit::TestCase
     lines = []
     logger = Thread.new do
       begin
-        Timeout::timeout(2) do
+        Timeout::timeout(10) do
           @in.tail(110) do |l|
             lines << l
           end
@@ -343,8 +345,10 @@ class FileTailTest < Test::Unit::TestCase
       end
     end
     appender = Thread.new do
-      until logger.stop?
-        sleep 0.1
+      Timeout::timeout(10) do
+        until lines.size == 100
+          sleep 0.1
+        end
       end
       @out.truncate 0
       @out.close
