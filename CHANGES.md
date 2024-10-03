@@ -5,29 +5,29 @@
 ### Significant Changes
 
 * **Improved waiting for log output by counting lines**
-	+ Increased timeout from 2 seconds to 10 seconds in multiple places
+  + Increased timeout from 2 seconds to 10 seconds in multiple places
 * **Added Ruby version check in Dockerfile**
-	+ Update `gem update --system` and installation to be conditional on Ruby version
-	+ Replace `bundle` with `bundle install` in script section
+  + Update `gem update --system` and installation to be conditional on Ruby version
+  + Replace `bundle` with `bundle install` in script section
 * **Convert CHANGES file to CHANGES\.md**
 
 ### Bug Fixes
 
 * **Add exit handler to delete temporary file**
-	- Added at_exit block to delete test file created in setup method.
+  - Added at_exit block to delete test file created in setup method.
 * **Refactor File class for debugging**
-	- Remove hardcoded `$DEBUG` variable usage in reopen_file and output_debug_information methods
-	- Introduce debug? method to check if `FILE_TAIL_DEBUG` environment variable is set to 1.
+  - Remove hardcoded `$DEBUG` variable usage in reopen_file and output_debug_information methods
+  - Introduce debug? method to check if `FILE_TAIL_DEBUG` environment variable is set to 1.
 
 ### Dependency Updates
 
 * **Update Ruby dependencies and add new development dependencies**
-	+ Added `.all_images.yml` file with Dockerfile configuration
-	+ Updated Gemfile to use Ruby **3.5.18** instead of **2.7.8**
-	+ Updated Rakefile to ignore additional files
-	+ Updated `file-tail.gemspec` to include `.all_images.yml` in the list of files
-	+ Updated `tests/file_tail_test.rb` to use absolute path for test file
-	+ Added new development dependencies: `all_images`, `simplecov`, and `debug`
+  + Added `.all_images.yml` file with Dockerfile configuration
+  + Updated Gemfile to use Ruby **3.5.18** instead of **2.7.8**
+  + Updated Rakefile to ignore additional files
+  + Updated `file-tail.gemspec` to include `.all_images.yml` in the list of files
+  + Updated `tests/file_tail_test.rb` to use absolute path for test file
+  + Added new development dependencies: `all_images`, `simplecov`, and `debug`
     + Updated dependency versions: `gem_hadar` to **1.17.1**, `test-unit` to
       **3.0**, and `tins` to **1.0**
 
