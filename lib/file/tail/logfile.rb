@@ -51,7 +51,7 @@ class File
         end
         if backward = opts[:backward] || opts[:rewind]
           (args = []) << backward
-          args << opt[:bufsiz] if opts[:bufsiz]
+          args << opts[:bufsiz] if opts[:bufsiz]
           file.backward(*args)
         elsif forward = opts[:forward] || opts[:wind]
           file.forward(forward)
@@ -64,7 +64,6 @@ class File
             block.call file
           ensure
             file.close
-            nil
           end
         else
           file
