@@ -39,7 +39,7 @@ end
 
 add_logfiles logfiles
 
-t = Thread.new do
+Thread.new do
   $logfiles.tail do |line|
     if $opt['M']
       puts "#{line.file.path}: #{line}"
