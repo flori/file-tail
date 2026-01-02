@@ -4,6 +4,7 @@
 .bundle
 .rbx
 .utilsrc
+.yardoc
 Gemfile.lock
 coverage
 errors.lst

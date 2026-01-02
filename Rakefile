@@ -12,7 +12,7 @@ GemHadar do
   description 'Library to tail files in Ruby'
   test_dir    'tests'
   ignore      '.*.sw[pon]', 'pkg', 'Gemfile.lock', 'coverage', '*.rbc', '.rbx',
-    '.AppleDouble', '.bundle', 'errors.lst', '.utilsrc', 'tmp'
+    '.AppleDouble', '.bundle', 'errors.lst', '.utilsrc', 'tmp', '.yardoc'
   readme      'README.md'
   licenses    << 'Apache-2.0'
 
