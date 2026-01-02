@@ -13,7 +13,7 @@ class FileTailTest < Test::Unit::TestCase
 
   def setup
     @out = File.new(File.join(__dir__, "test.#$$"), "wb")
-    at_exit { rm_f File.expand_path(@out.path) }
+    at_exit { path = @out&.path and rm_f File.expand_path(path) }
     append(@out, 100)
     @in = File.new(@out.path, "rb")
     @in.extend(File::Tail)
