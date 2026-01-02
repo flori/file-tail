@@ -16,6 +16,10 @@ GemHadar do
   readme      'README.md'
   licenses    << 'Apache-2.0'
 
+  changelog do
+    filename 'CHANGES.md'
+  end
+
   dependency  'tins', '~>1.0'
 
   development_dependency 'test-unit', '~>3.0'
