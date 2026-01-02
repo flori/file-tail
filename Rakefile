@@ -20,6 +20,10 @@ GemHadar do
     filename 'CHANGES.md'
   end
 
+  github_workflows(
+    'static.yml' => {}
+  )
+
   dependency  'tins', '~>1.0'
 
   development_dependency 'test-unit', '~>3.0'
