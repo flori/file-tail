@@ -8,3 +8,4 @@ Gemfile.lock
 coverage
 errors.lst
 pkg
+tmp
