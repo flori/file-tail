@@ -241,16 +241,18 @@ class File
       if @stat
         if stat.ino != @stat.ino or stat.dev != @stat.dev
           @stat = nil
-          raise ReopenException.new(:top)
+          raise ReopenException.new(:top) # File ino/dev has changed, start from top
         end
         if stat.size < @stat.size
           @stat = nil
-          raise ReopenException.new(:top)
+          raise ReopenException.new(:top) # File shrunk, start from top
         end
       end
       @stat = stat
-    rescue Errno::ENOENT, Errno::ESTALE
-      raise ReopenException.new(:top)
+    rescue Errno::ENOENT
+      raise ReopenException.new(:top) # File was missing, maybe it has been rotated, start from top
+    rescue Errno::ESTALE
+      raise ReopenException # File is stale let's try opening again with same mo
     end
 
     def sleep_interval
