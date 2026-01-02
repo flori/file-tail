@@ -1,5 +1,35 @@
 # Changes
 
+## 2026-01-02 v1.4.0
+
+- Enhanced file reopening logic to handle `Errno::ENOENT` and `Errno::ESTALE`
+  errors separately, preventing line skipping during file rotation
+- Fixed buffer size parameter passing and cleaned up the close block
+- Added nil safety check for `@out.path` before removing temporary files
+- Updated gemspec to include the `LICENSE` file and added a GitHub Actions
+  workflow
+- Replaced the old documentation in README with a comprehensive architecture
+  overview, usage examples, and debugging sections
+- Added automated documentation deployment workflow using GitHub Actions with
+  Ruby **3.4** environment
+- Removed unnecessary `t =` assignment for thread in `rtail` binary
+- Removed support for Ruby **3.0** Alpine image in CI configuration
+- Renamed `COPYING` file to `LICENSE` for better standard compliance
+- Added `.yardoc` to gitignore and rake ignore list
+- Updated test file path to use the `tmp` directory for better test
+  organization
+- Added `tmp` directory to gitignore, gemspec, and git tracking with
+  `tmp/.gitkeep`
+- Updated CI image configuration to support Ruby **4.0** with `yaml-dev` and
+  `openssl-dev` dependencies
+- Updated gem metadata and dependencies, including `rubygems_version` to
+  **4.0.2** and `gem_hadar` development dependency to **>= 2.16.3**
+- Added changelog generation support to the Rakefile for automated changelog
+  management
+- Updated Dockerfile dependencies for Ruby version detection and added Ruby
+  **3.4**-alpine image support
+- Fixed typos in the codebase
+
 ## 2024-09-13 v1.3.0
 
 ### Significant Changes
