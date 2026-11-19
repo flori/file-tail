@@ -16,13 +16,13 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/flori/file-tail".freeze
   s.licenses = ["Apache-2.0".freeze]
   s.rdoc_options = ["--title".freeze, "File-tail - File::Tail for Ruby".freeze, "--main".freeze, "README.md".freeze]
-  s.rubygems_version = "4.0.2".freeze
+  s.rubygems_version = "4.0.24".freeze
   s.summary = "File::Tail for Ruby".freeze
   s.test_files = ["tests/file_tail_group_test.rb".freeze, "tests/file_tail_test.rb".freeze, "tests/test_helper.rb".freeze]
 
   s.specification_version = 4
 
-  s.add_development_dependency(%q<gem_hadar>.freeze, [">= 2.16.3".freeze])
+  s.add_development_dependency(%q<gem_hadar>.freeze, [">= 2.24.1".freeze])
   s.add_development_dependency(%q<test-unit>.freeze, ["~> 3.0".freeze])
   s.add_development_dependency(%q<all_images>.freeze, [">= 0".freeze])
   s.add_development_dependency(%q<simplecov>.freeze, [">= 0".freeze])
